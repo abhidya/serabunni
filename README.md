@@ -5,7 +5,9 @@ An immersive Digimon-themed retro arcade experience with privacy-safe contact ha
 - 🔒 Password protection for personalized access
 - 🎨 Five theme options (Pink, Dark, Holiday, Halloween, **Digimon Mode**)
 - 🎮 Five ad-free HTML5 games (Snake, Breakout, Tetris, Space Invaders, Platform Runner)
-- 🐉 Digimon Adventure aesthetic with digital aura and data motifs
+- 🐉 **Choose Your Own Adventure game** - Fantasy D&D-inspired story with multiple endings
+- ⌨️ **MS-DOS Terminal Interface** - Classic command-line navigation and utilities
+- 🎲 **D&D Tabletop Utilities** - Dice roller, random generators, and SRD reference
 - 🌌 Rotating background visualizations (starfield, data grid, particles)
 - 🔐 Privacy-enhanced contact information (obfuscated in source, click-to-reveal)
 - 🎵 Background music toggle with 8-bit looped theme
@@ -80,6 +82,51 @@ All games are:
 - Enhanced Konami code Easter egg (↑↑↓↓←→←→BA)
   - Rainbow effect in standard themes
   - Digimon "evolution sequence" with data bursts in Digimon mode
+
+### Choose Your Own Adventure Game
+- **The Dragon's Dilemma** - Fantasy D&D-inspired interactive story
+- Features:
+  - 40+ story nodes with branching narratives
+  - Character stats system (Strength, Wisdom, Charisma, Luck)
+  - Dice-based combat and skill checks
+  - Inventory management
+  - 6 different endings based on your choices
+  - D&D-style mechanics (d6, d8, d20 rolls with modifiers)
+- Accessible via the 🐉 button on the right side
+
+### MS-DOS Terminal Interface
+- Classic green-on-black terminal with authentic DOS styling
+- Available commands:
+  - `help` - Show all available commands
+  - `ls` - List available sections
+  - `cd <section>` - Navigate to profile, games, cyoa, or utilities
+  - `play <game>` - Launch games or CYOA adventure
+  - `roll <dice>` - Roll dice (e.g., "roll 2d6+3", "roll d20")
+  - `generate <type>` - Random generators (name, loot, encounter, quest)
+  - `srd <topic>` - View D&D 5e SRD reference (classes, conditions, rules)
+  - `theme <name>` - Change website theme
+  - `exit` - Close terminal
+  - `matrix` - Secret easter egg mode
+- Features command history (↑/↓ arrows) and tab completion
+- Accessible via the ⌨️ button on the right side
+
+### D&D Tabletop Utilities
+- **Dice Roller**:
+  - Support for all standard dice (d4, d6, d8, d10, d12, d20, d100)
+  - Custom expressions (e.g., "3d6+2", "2d8-1")
+  - Advantage and Disadvantage rolls
+  - Quick-select dice buttons
+- **Random Generators**:
+  - Character names (fantasy-themed)
+  - Treasure loot with rarity system (common, uncommon, rare)
+  - Random encounters with difficulty ratings
+  - Quest hooks for adventures
+- **SRD Reference**:
+  - D&D 5e class information
+  - Condition effects reference
+  - Common game rules
+  - Link to full open-source SRD
+- Slide-out panel accessible via the 🎲 button on the right side
 
 ### Privacy & Security Features
 - **Contact Information Obfuscation**
