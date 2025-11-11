@@ -1,9 +1,73 @@
+// Password Protection
+const PASSWORD = '1998';
+const passwordOverlay = document.getElementById('password-overlay');
+const passwordInput = document.getElementById('password-input');
+const passwordSubmit = document.getElementById('password-submit');
+
+function checkPassword() {
+    const entered = passwordInput.value;
+    if (entered === PASSWORD) {
+        // Store in session storage
+        sessionStorage.setItem('serabunni-authenticated', 'true');
+        // Fade out overlay
+        passwordOverlay.classList.add('hidden');
+        // Remove from DOM after animation
+        setTimeout(() => {
+            passwordOverlay.style.display = 'none';
+        }, 800);
+    } else {
+        // Shake animation on wrong password
+        passwordInput.style.animation = 'shake 0.5s';
+        passwordInput.value = '';
+        setTimeout(() => {
+            passwordInput.style.animation = '';
+        }, 500);
+    }
+}
+
+// Check if already authenticated
+if (sessionStorage.getItem('serabunni-authenticated') === 'true') {
+    passwordOverlay.style.display = 'none';
+}
+
+// Password submit handlers
+passwordSubmit.addEventListener('click', checkPassword);
+passwordInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        checkPassword();
+    }
+});
+
+// Add shake animation
+const shakeStyle = document.createElement('style');
+shakeStyle.innerHTML = `
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+        20%, 40%, 60%, 80% { transform: translateX(10px); }
+    }
+`;
+document.head.appendChild(shakeStyle);
+
 // Theme Management
-let currentTheme = localStorage.getItem('serabunni-theme') || 'default';
+let currentTheme = localStorage.getItem('serabunni-theme') || checkAutoTheme();
+
+function checkAutoTheme() {
+    // Check if we should auto-enable Halloween theme
+    const now = new Date();
+    const month = now.getMonth(); // 0-indexed, so October = 9
+    const day = now.getDate();
+    
+    // October 25 - November 3
+    if ((month === 9 && day >= 25) || (month === 10 && day <= 3)) {
+        return 'halloween';
+    }
+    return 'default';
+}
 
 function setTheme(theme) {
     // Remove all theme classes
-    document.body.classList.remove('theme-dark', 'theme-holiday');
+    document.body.classList.remove('theme-dark', 'theme-holiday', 'theme-halloween');
     
     // Add new theme class
     if (theme !== 'default') {
@@ -26,6 +90,8 @@ function setTheme(theme) {
     clearFloatingElements();
     if (theme === 'holiday') {
         startSnowfall();
+    } else if (theme === 'halloween') {
+        startHalloweenEffects();
     } else {
         startFloatingEmojis();
     }
@@ -128,6 +194,45 @@ function startSnowfall() {
     
     // Create new snowflake periodically
     floatingInterval = setInterval(createSnowflake, 300);
+}
+
+function startHalloweenEffects() {
+    const halloweenEmojis = ['🦇', '👻', '🎃', '💀', '🕷️', '🕸️'];
+    
+    function createHalloweenElement() {
+        const container = document.getElementById('floating-elements');
+        const element = document.createElement('div');
+        const emoji = halloweenEmojis[Math.floor(Math.random() * halloweenEmojis.length)];
+        
+        if (emoji === '🦇' || emoji === '👻') {
+            element.className = emoji === '🦇' ? 'bat' : 'ghost';
+            element.textContent = emoji;
+            element.style.top = (Math.random() * 80 + 10) + '%';
+            element.style.left = '-100px';
+            element.style.animationDuration = (10 + Math.random() * 10) + 's';
+            element.style.animationDelay = Math.random() * 3 + 's';
+        } else {
+            element.className = 'floating-emoji';
+            element.textContent = emoji;
+            element.style.left = Math.random() * 100 + '%';
+            element.style.animationDuration = (10 + Math.random() * 10) + 's';
+            element.style.animationDelay = Math.random() * 5 + 's';
+        }
+        
+        container.appendChild(element);
+        
+        setTimeout(() => {
+            element.remove();
+        }, 20000);
+    }
+    
+    // Create initial elements
+    for (let i = 0; i < 8; i++) {
+        setTimeout(createHalloweenElement, i * 800);
+    }
+    
+    // Create new element periodically
+    floatingInterval = setInterval(createHalloweenElement, 2500);
 }
 
 // Sparkle Effect
