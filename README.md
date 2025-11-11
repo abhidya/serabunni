@@ -57,6 +57,7 @@ Enjoy classic retro games built locally with HTML5 Canvas (no external ads or tr
 - 🟦 **Tetris** - Stack falling blocks and clear lines
 - 👾 **Space Invaders** - Defend Earth from alien invasion
 - 🏃 **Platform Runner** - Jump over obstacles in endless runner
+- 🐜 **Ant Queen** - Idle/clicker colony management game with prestige system (Phaser 3)
 - 🐉 **Digimon Animation** - Animated Digimon sprite showcase (CodePen embed)
 
 All games are:

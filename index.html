@@ -8,6 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="interactive-features.css">
+    <link rel="stylesheet" href="ant-queen.css">
 </head>
 <body>
     <!-- Password Overlay -->
@@ -172,6 +173,52 @@
                             </iframe>
                         </div>
 
+                        <!-- Game 6: Ant Queen - Direct Integration -->
+                        <div class="game-container" id="ant-queen-game-container">
+                            <h3 class="game-title">🐜 Ant Queen - Idle Clicker</h3>
+                            <div class="ant-queen-wrapper">
+                                <canvas id="ant-queen-canvas"></canvas>
+                                <div id="ant-queen-game">
+                                    <div class="ant-queen-header">
+                                        <h1>🐜 ANT QUEEN 👑</h1>
+                                        <p>Build and grow your ant colony!</p>
+                                    </div>
+
+                                    <div id="ant-queen-currency-display">
+                                        <div class="ant-queen-currency-item">🌾 Food: <span id="ant-queen-food-amount">10</span></div>
+                                        <div class="ant-queen-currency-item">🥚 Brood: <span id="ant-queen-brood-amount">0</span></div>
+                                        <div class="ant-queen-currency-item">👑 Royal Jelly: <span id="ant-queen-jelly-amount">0</span></div>
+                                        <div class="ant-queen-production">⚡ <span id="ant-queen-production-rate">0.00</span>/sec</div>
+                                    </div>
+
+                                    <div id="ant-queen-click-area">
+                                        <div class="ant-queen-click-text">🌾 Click for Food! 🌾</div>
+                                    </div>
+
+                                    <div id="ant-queen-shop-container">
+                                        <div class="ant-queen-shop-section">
+                                            <h2>🐜 Workers</h2>
+                                            <div id="ant-queen-units-shop"></div>
+                                        </div>
+
+                                        <div class="ant-queen-shop-section">
+                                            <h2>🏠 Buildings</h2>
+                                            <div id="ant-queen-rooms-shop"></div>
+                                        </div>
+                                    </div>
+
+                                    <button id="ant-queen-prestige-button">👑 PRESTIGE (Locked)</button>
+
+                                    <div class="ant-queen-stats">
+                                        <div>Colony Age: <span id="ant-queen-colony-age">0</span>s | Total Clicks: <span id="ant-queen-total-clicks">0</span></div>
+                                        <div style="margin-top: 10px; font-size: 10px;">
+                                            Built with HTML5 Canvas | Save system with offline progress | Prestige for meta-progression
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Digimon Animation -->
                         <div class="game-container">
                             <h3 class="game-title">🐉 Digimon Animation</h3>
@@ -206,5 +253,6 @@
     <script src="dnd-utilities.js"></script>
     <script src="terminal-interface.js"></script>
     <script src="interactive-features.js"></script>
+    <script src="ant-queen.js"></script>
 </body>
 </html>
