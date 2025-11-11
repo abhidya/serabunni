@@ -1,0 +1,684 @@
+/**
+ * Styles for Interactive Features
+ * Terminal Interface, CYOA Game, and D&D Utilities
+ */
+
+/* ============================================
+   Terminal Interface Styles
+   ============================================ */
+
+.terminal-interface {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    height: 70vh;
+    background: #000;
+    border: 3px solid #00ff00;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.5), inset 0 0 100px rgba(0, 255, 0, 0.1);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Courier New', monospace;
+    animation: terminalFadeIn 0.3s ease-out;
+}
+
+@keyframes terminalFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.terminal-header {
+    background: #00ff00;
+    color: #000;
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #00ff00;
+    font-weight: bold;
+}
+
+.terminal-title {
+    font-size: 14px;
+}
+
+.terminal-close {
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.terminal-close:hover {
+    background: #cc0000;
+}
+
+.terminal-output {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    color: #00ff00;
+    font-size: 14px;
+    line-height: 1.5;
+    background: #000;
+    scrollbar-width: thin;
+    scrollbar-color: #00ff00 #000;
+}
+
+.terminal-output::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terminal-output::-webkit-scrollbar-track {
+    background: #000;
+}
+
+.terminal-output::-webkit-scrollbar-thumb {
+    background: #00ff00;
+    border-radius: 4px;
+}
+
+.terminal-line {
+    margin: 2px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.terminal-line.command {
+    color: #00ffff;
+}
+
+.terminal-line.error {
+    color: #ff0000;
+}
+
+.terminal-line.success {
+    color: #ffff00;
+    font-weight: bold;
+}
+
+.terminal-input-line {
+    display: flex;
+    padding: 10px 15px;
+    background: #000;
+    border-top: 1px solid #00ff00;
+    align-items: center;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+    margin-right: 8px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.terminal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    outline: none;
+    caret-color: #00ff00;
+}
+
+/* Matrix mode animation */
+.terminal-interface.matrix-mode {
+    animation: matrixGlitch 0.5s infinite;
+}
+
+@keyframes matrixGlitch {
+    0%, 100% { border-color: #00ff00; }
+    25% { border-color: #00ffff; }
+    50% { border-color: #ffff00; }
+    75% { border-color: #ff00ff; }
+}
+
+.terminal-interface.matrix-mode .terminal-output {
+    animation: matrixScroll 2s linear infinite;
+}
+
+@keyframes matrixScroll {
+    0% { text-shadow: 0 0 5px #00ff00; }
+    50% { text-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00; }
+    100% { text-shadow: 0 0 5px #00ff00; }
+}
+
+/* ============================================
+   CYOA Game Modal Styles
+   ============================================ */
+
+.cyoa-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.cyoa-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.cyoa-container {
+    background: linear-gradient(135deg, #2d1b3d 0%, #1a1a2e 100%);
+    border: 4px solid #ff6b9d;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 50px rgba(255, 107, 157, 0.5);
+    animation: cyoaSlideIn 0.4s ease-out;
+}
+
+@keyframes cyoaSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.cyoa-header {
+    background: linear-gradient(90deg, #ff6b9d 0%, #c06c84 100%);
+    padding: 15px 20px;
+    border-radius: 11px 11px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cyoa-title {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cyoa-close {
+    background: #fff;
+    color: #ff6b9d;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.cyoa-close:hover {
+    background: #ff1493;
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+.cyoa-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 25px;
+    color: #fff;
+}
+
+.cyoa-stats {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 2px solid #ff69b4;
+    flex-wrap: wrap;
+}
+
+.cyoa-stat {
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+}
+
+.cyoa-stat-label {
+    font-size: 12px;
+    color: #ff69b4;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.cyoa-stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffff00;
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+.cyoa-inventory {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border-left: 3px solid #00ffff;
+}
+
+.cyoa-inventory-title {
+    font-size: 14px;
+    color: #00ffff;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.cyoa-inventory-items {
+    font-size: 13px;
+    color: #ccc;
+}
+
+.cyoa-node-title {
+    font-size: 28px;
+    color: #ffff00;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    font-weight: bold;
+}
+
+.cyoa-node-text {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    color: #fff;
+    white-space: pre-wrap;
+}
+
+.cyoa-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cyoa-choice {
+    background: linear-gradient(90deg, #ff6b9d 0%, #c06c84 100%);
+    color: #fff;
+    padding: 15px 20px;
+    border: 2px solid #ff1493;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.cyoa-choice:hover {
+    background: linear-gradient(90deg, #c06c84 0%, #ff6b9d 100%);
+    transform: translateX(10px);
+    box-shadow: 0 4px 10px rgba(255, 20, 147, 0.5);
+}
+
+.cyoa-choice:active {
+    transform: translateX(10px) scale(0.98);
+}
+
+.cyoa-dice-result {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(255, 215, 0, 0.2);
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    animation: diceRollAnim 0.5s ease-out;
+}
+
+@keyframes diceRollAnim {
+    0% { transform: scale(0.9); opacity: 0; }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.cyoa-dice-title {
+    color: #ffd700;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.cyoa-dice-rolls {
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.cyoa-dice-total {
+    font-size: 20px;
+    color: #ffff00;
+    font-weight: bold;
+}
+
+/* ============================================
+   D&D Utilities Panel
+   ============================================ */
+
+.dnd-utilities-panel {
+    position: fixed;
+    right: -350px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 350px;
+    max-height: 80vh;
+    background: linear-gradient(135deg, #2d1b3d 0%, #1a1a2e 100%);
+    border: 3px solid #ff6b9d;
+    border-right: none;
+    border-radius: 15px 0 0 15px;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 9000;
+    transition: right 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.dnd-utilities-panel.active {
+    right: 0;
+}
+
+.dnd-toggle-btn {
+    position: absolute;
+    left: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 80px;
+    background: linear-gradient(90deg, #ff6b9d 0%, #c06c84 100%);
+    border: 3px solid #ff1493;
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.dnd-toggle-btn:hover {
+    background: linear-gradient(90deg, #c06c84 0%, #ff6b9d 100%);
+    width: 55px;
+}
+
+.dnd-panel-header {
+    background: linear-gradient(90deg, #ff6b9d 0%, #c06c84 100%);
+    padding: 15px;
+    border-radius: 12px 0 0 0;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+.dnd-panel-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    color: #fff;
+}
+
+.dnd-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 2px solid #ff69b4;
+}
+
+.dnd-section-title {
+    color: #ff69b4;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.dice-input {
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #ff69b4;
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.dice-input:focus {
+    outline: none;
+    border-color: #ff1493;
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+}
+
+.dice-btn {
+    background: linear-gradient(90deg, #ff6b9d 0%, #c06c84 100%);
+    color: #fff;
+    border: 2px solid #ff1493;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin: 5px;
+    font-size: 14px;
+}
+
+.dice-btn:hover {
+    background: linear-gradient(90deg, #c06c84 0%, #ff6b9d 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 20, 147, 0.5);
+}
+
+.dice-result {
+    margin-top: 10px;
+    padding: 12px;
+    background: rgba(255, 215, 0, 0.2);
+    border: 2px solid #ffd700;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+}
+
+.generator-select {
+    width: 100%;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #ff69b4;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.generator-output {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border-left: 3px solid #00ffff;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.6;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.srd-list {
+    list-style: none;
+    padding: 0;
+}
+
+.srd-item {
+    padding: 8px;
+    margin: 5px 0;
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid #ff69b4;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+/* ============================================
+   Toggle Buttons
+   ============================================ */
+
+.feature-toggle-btn {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ff1493;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 9500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.feature-toggle-btn:hover {
+    transform: scale(1.15) rotate(15deg);
+    box-shadow: 0 4px 12px rgba(255, 20, 147, 0.5);
+}
+
+#terminal-toggle {
+    bottom: 20px;
+    right: 20px;
+}
+
+#cyoa-toggle {
+    bottom: 85px;
+    right: 20px;
+}
+
+#dnd-toggle {
+    bottom: 150px;
+    right: 20px;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 768px) {
+    .terminal-interface {
+        width: 95%;
+        height: 80vh;
+    }
+
+    .cyoa-container {
+        width: 95%;
+        max-height: 85vh;
+    }
+
+    .cyoa-node-title {
+        font-size: 22px;
+    }
+
+    .cyoa-node-text {
+        font-size: 14px;
+    }
+
+    .cyoa-choice {
+        font-size: 14px;
+        padding: 12px 15px;
+    }
+
+    .dnd-utilities-panel {
+        width: 300px;
+    }
+
+    .feature-toggle-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+
+    #cyoa-toggle {
+        bottom: 75px;
+    }
+
+    #dnd-toggle {
+        bottom: 130px;
+    }
+}
+
+@media (max-width: 480px) {
+    .terminal-interface {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .cyoa-container {
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+
+    .cyoa-stats {
+        gap: 10px;
+    }
+
+    .cyoa-stat {
+        min-width: 60px;
+    }
+
+    .dnd-utilities-panel {
+        width: 100%;
+        right: -100%;
+        border-radius: 0;
+    }
+
+    .dnd-utilities-panel.active {
+        right: 0;
+    }
+
+    .dnd-toggle-btn {
+        left: -45px;
+        width: 45px;
+        height: 60px;
+        font-size: 20px;
+    }
+}
