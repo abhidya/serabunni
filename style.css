@@ -16,6 +16,23 @@ body {
     transition: background 0.5s ease;
 }
 
+/* Dynamic Background Layer */
+#dynamic-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+#dynamic-background canvas {
+    width: 100%;
+    height: 100%;
+}
+
 /* Password Overlay */
 .password-overlay {
     position: fixed;
@@ -246,6 +263,142 @@ body.theme-halloween .games-intro {
     color: #ffa500;
 }
 
+/* Digimon Theme */
+body.theme-digimon {
+    background: linear-gradient(135deg, #001a33 0%, #003366 100%);
+    animation: digiData 20s linear infinite;
+}
+
+@keyframes digiData {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+body.theme-digimon::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px);
+    z-index: 0;
+    pointer-events: none;
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(20px); }
+}
+
+body.theme-digimon .header {
+    background: linear-gradient(180deg, #00ffff 0%, #0099cc 100%);
+    border-color: #00ffff;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+    animation: digiGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes digiGlow {
+    from { box-shadow: 0 0 20px rgba(0, 255, 255, 0.6); }
+    to { box-shadow: 0 0 40px rgba(0, 255, 255, 0.9); }
+}
+
+body.theme-digimon .logo {
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+    animation: textFlicker 3s infinite;
+}
+
+@keyframes textFlicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+body.theme-digimon .profile-box {
+    background: linear-gradient(135deg, rgba(0, 20, 40, 0.9) 0%, rgba(0, 40, 80, 0.9) 100%);
+    border-color: #00ffff;
+    color: #00ffff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+body.theme-digimon .section-title {
+    background: linear-gradient(90deg, #00ffff 0%, #0099cc 100%);
+    text-shadow: 0 0 10px #fff;
+}
+
+body.theme-digimon .games-box {
+    background: linear-gradient(135deg, rgba(0, 20, 40, 0.9) 0%, rgba(0, 40, 80, 0.9) 100%);
+    border-color: #00ffff;
+}
+
+body.theme-digimon .link-btn {
+    background: linear-gradient(90deg, #00ffff 0%, #0099cc 100%);
+    border-color: #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+body.theme-digimon .link-btn:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+}
+
+body.theme-digimon .footer {
+    background: linear-gradient(180deg, #00ffff 0%, #0099cc 100%);
+    border-color: #00ffff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+}
+
+body.theme-digimon .tag {
+    background: #0099cc;
+    border-color: #00ffff;
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+}
+
+body.theme-digimon .name {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+body.theme-digimon .aka {
+    color: #66ccff;
+}
+
+body.theme-digimon .contact-info a {
+    color: #00ffff;
+}
+
+body.theme-digimon .game-title {
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff;
+}
+
+body.theme-digimon .games-intro {
+    color: #66ccff;
+}
+
+/* Data Burst Effect for Digimon Mode */
+.data-burst {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #00ffff;
+    border-radius: 50%;
+    animation: burstExpand 1s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes burstExpand {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
 /* MySpace Container */
 .myspace-container {
     max-width: 1200px;
@@ -269,6 +422,65 @@ body.theme-halloween .games-intro {
     border-radius: 25px;
     border: 2px solid rgba(255, 105, 180, 0.5);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Background Toggle */
+.background-toggle {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.bg-toggle-btn {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ff1493;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.bg-toggle-btn:hover {
+    transform: scale(1.15) rotate(15deg);
+    box-shadow: 0 4px 12px rgba(255, 20, 147, 0.5);
+}
+
+/* Music Toggle */
+.music-toggle {
+    position: fixed;
+    top: 155px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.music-toggle-btn {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ff1493;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.music-toggle-btn:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(255, 20, 147, 0.5);
+}
+
+.music-toggle-btn.playing {
+    animation: musicPulse 1s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
 .theme-btn {
@@ -423,6 +635,34 @@ body.theme-halloween .games-intro {
 
 .contact-info a:hover {
     text-decoration: underline;
+}
+
+.reveal-link {
+    cursor: pointer;
+    padding: 5px 10px;
+    background: rgba(255, 20, 147, 0.1);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.reveal-link:hover {
+    background: rgba(255, 20, 147, 0.2);
+    transform: scale(1.05);
+}
+
+.revealed {
+    animation: revealAnim 0.5s ease-out;
+}
+
+@keyframes revealAnim {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* About Me */
