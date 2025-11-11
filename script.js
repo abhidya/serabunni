@@ -1,3 +1,135 @@
+// Theme Management
+let currentTheme = localStorage.getItem('serabunni-theme') || 'default';
+
+function setTheme(theme) {
+    // Remove all theme classes
+    document.body.classList.remove('theme-dark', 'theme-holiday');
+    
+    // Add new theme class
+    if (theme !== 'default') {
+        document.body.classList.add(`theme-${theme}`);
+    }
+    
+    // Update active button
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.theme === theme) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Save preference
+    localStorage.setItem('serabunni-theme', theme);
+    currentTheme = theme;
+    
+    // Clear and restart theme-specific effects
+    clearFloatingElements();
+    if (theme === 'holiday') {
+        startSnowfall();
+    } else {
+        startFloatingEmojis();
+    }
+}
+
+// Initialize theme on load
+document.addEventListener('DOMContentLoaded', () => {
+    setTheme(currentTheme);
+});
+
+// Theme switcher event listeners
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('theme-btn')) {
+        setTheme(e.target.dataset.theme);
+    }
+});
+
+// Custom Cursor
+const cursor = document.getElementById('custom-cursor');
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX - 15 + 'px';
+    cursor.style.top = e.clientY - 15 + 'px';
+});
+
+// Cursor interaction effects
+document.querySelectorAll('a, button, .link-btn, .tag').forEach(elem => {
+    elem.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'scale(1.5)';
+        cursor.style.borderColor = '#ff1493';
+    });
+    
+    elem.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'scale(1)';
+        cursor.style.borderColor = '#ff69b4';
+    });
+});
+
+// Floating Elements Management
+let floatingInterval;
+let floatingElements = [];
+
+function clearFloatingElements() {
+    if (floatingInterval) {
+        clearInterval(floatingInterval);
+    }
+    const container = document.getElementById('floating-elements');
+    container.innerHTML = '';
+    floatingElements = [];
+}
+
+function startFloatingEmojis() {
+    const emojis = ['💖', '✨', '🌟', '💫', '🎀', '🦋', '🌸', '💕', '🎵', '🎨'];
+    
+    function createFloatingEmoji() {
+        const container = document.getElementById('floating-elements');
+        const emoji = document.createElement('div');
+        emoji.className = 'floating-emoji';
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.left = Math.random() * 100 + '%';
+        emoji.style.animationDuration = (10 + Math.random() * 10) + 's';
+        emoji.style.animationDelay = Math.random() * 5 + 's';
+        
+        container.appendChild(emoji);
+        
+        setTimeout(() => {
+            emoji.remove();
+        }, 20000);
+    }
+    
+    // Create initial emojis
+    for (let i = 0; i < 5; i++) {
+        setTimeout(createFloatingEmoji, i * 1000);
+    }
+    
+    // Create new emoji periodically
+    floatingInterval = setInterval(createFloatingEmoji, 3000);
+}
+
+function startSnowfall() {
+    function createSnowflake() {
+        const container = document.getElementById('floating-elements');
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        snowflake.textContent = '❄';
+        snowflake.style.left = Math.random() * 100 + '%';
+        snowflake.style.fontSize = (0.5 + Math.random() * 1) + 'em';
+        snowflake.style.animationDuration = (5 + Math.random() * 10) + 's';
+        
+        container.appendChild(snowflake);
+        
+        setTimeout(() => {
+            snowflake.remove();
+        }, 15000);
+    }
+    
+    // Create initial snowflakes
+    for (let i = 0; i < 20; i++) {
+        setTimeout(createSnowflake, i * 200);
+    }
+    
+    // Create new snowflake periodically
+    floatingInterval = setInterval(createSnowflake, 300);
+}
+
 // Sparkle Effect
 function createSparkle() {
     const sparklesContainer = document.getElementById('sparkles');

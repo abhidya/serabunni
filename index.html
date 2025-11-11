@@ -4,14 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SeraBunni - Katarina Davis</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="myspace-container">
+        <!-- Theme Switcher -->
+        <div class="theme-switcher">
+            <button class="theme-btn" data-theme="default" title="Pink Theme">💖</button>
+            <button class="theme-btn" data-theme="dark" title="Dark Theme">🌙</button>
+            <button class="theme-btn" data-theme="holiday" title="Holiday Theme">🎄</button>
+        </div>
+
         <!-- Header -->
         <div class="header">
             <div class="logo">SeraBunni</div>
             <div class="tagline">Welcome to my corner of the internet! ✨</div>
+            <div class="marquee-container">
+                <div class="marquee">✨ Thanks for visiting! ✨ Follow me on social media! ✨ Play some games! ✨ Have a great day! ✨</div>
+            </div>
         </div>
 
         <!-- Main Content -->
@@ -50,10 +61,11 @@
                         <div class="link-buttons">
                             <a href="tel:+16503985313" class="link-btn">📱 Call Me</a>
                             <a href="sms:+16503985313" class="link-btn">💬 Text Me</a>
-                            <a href="#" class="link-btn">📧 Email</a>
-                            <a href="#" class="link-btn">📷 Instagram</a>
-                            <a href="#" class="link-btn">🐦 Twitter</a>
-                            <a href="#" class="link-btn">💼 LinkedIn</a>
+                            <a href="mailto:serabunnivt@gmail.com" class="link-btn">📧 Email</a>
+                            <a href="https://instagram.com/flaming_kitta" target="_blank" class="link-btn">📷 Instagram</a>
+                            <a href="https://twitter.com/SeraBunni" target="_blank" class="link-btn">🐦 Twitter</a>
+                            <a href="https://youtube.com/@SeraBunni" target="_blank" class="link-btn">📺 YouTube</a>
+                            <a href="https://linkedin.com/in/katarina-davis-a3303531a" target="_blank" class="link-btn">💼 LinkedIn</a>
                         </div>
                     </div>
                 </div>
@@ -84,35 +96,35 @@
                         <!-- Game 1: Snake -->
                         <div class="game-container">
                             <h3 class="game-title">🐍 Classic Snake</h3>
-                            <iframe scrolling="no" title="Snake Game" src="https://codepen.io/peterjaap/embed/preview/BaZqNEK?default-tab=result&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+                            <iframe scrolling="no" title="Snake Game" src="https://codepen.io/peterjaap/embed/BaZqNEK?default-tab=result&editable=false" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
                             </iframe>
                         </div>
 
                         <!-- Game 2: Breakout -->
                         <div class="game-container">
                             <h3 class="game-title">🧱 Breakout</h3>
-                            <iframe scrolling="no" title="Breakout Game" src="https://codepen.io/gdube/embed/preview/JybxxZ?default-tab=result&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+                            <iframe scrolling="no" title="Breakout Game" src="https://codepen.io/gdube/embed/JybxxZ?default-tab=result&editable=false" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
                             </iframe>
                         </div>
 
                         <!-- Game 3: Tetris -->
                         <div class="game-container">
                             <h3 class="game-title">🟦 Tetris</h3>
-                            <iframe scrolling="no" title="Tetris Game" src="https://codepen.io/diondiondion/embed/preview/KKNgjoO?default-tab=result&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+                            <iframe scrolling="no" title="Tetris Game" src="https://codepen.io/diondiondion/embed/KKNgjoO?default-tab=result&editable=false" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
                             </iframe>
                         </div>
 
                         <!-- Game 4: Space Invaders -->
                         <div class="game-container">
                             <h3 class="game-title">👾 Space Invaders</h3>
-                            <iframe scrolling="no" title="Space Invaders" src="https://codepen.io/mamlaki/embed/preview/jrRJza?default-tab=result&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+                            <iframe scrolling="no" title="Space Invaders" src="https://codepen.io/mamlaki/embed/jrRJza?default-tab=result&editable=false" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
                             </iframe>
                         </div>
 
                         <!-- Game 5: Pac-Man -->
                         <div class="game-container">
                             <h3 class="game-title">👻 Pac-Man</h3>
-                            <iframe scrolling="no" title="Pac-Man" src="https://codepen.io/hellokatili/embed/preview/xwKRmo?default-tab=result&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+                            <iframe scrolling="no" title="Pac-Man" src="https://codepen.io/hellokatili/embed/xwKRmo?default-tab=result&editable=false" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
                             </iframe>
                         </div>
                     </div>
@@ -129,6 +141,12 @@
 
     <!-- Sparkle Effect -->
     <div id="sparkles"></div>
+    
+    <!-- Custom Cursor -->
+    <div id="custom-cursor"></div>
+    
+    <!-- Floating Elements -->
+    <div id="floating-elements"></div>
 
     <script src="script.js"></script>
 </body>
