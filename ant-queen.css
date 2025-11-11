@@ -1,0 +1,266 @@
+/* Ant Queen Game Styles - Scoped to avoid conflicts with main site */
+
+.ant-queen-wrapper {
+    background: linear-gradient(135deg, #8b6914 0%, #4a2c2a 100%);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    min-height: 800px;
+    color: #fff;
+}
+
+#ant-queen-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 10px;
+}
+
+#ant-queen-game {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ant-queen-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.ant-queen-header h1 {
+    font-size: 48px;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px #000;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ant-queen-header p {
+    font-size: 18px;
+    color: #ddd;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#ant-queen-currency-display {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px 30px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ffd700;
+}
+
+.ant-queen-currency-item {
+    font-size: 18px;
+    margin: 5px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ant-queen-production {
+    font-size: 14px;
+    color: #90ee90;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#ant-queen-click-area {
+    background: rgba(255, 215, 0, 0.2);
+    border: 3px solid #ffd700;
+    border-radius: 15px;
+    padding: 40px;
+    margin: 20px 0;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.1s;
+}
+
+#ant-queen-click-area:hover {
+    background: rgba(255, 215, 0, 0.3);
+    transform: scale(1.02);
+}
+
+#ant-queen-click-area:active {
+    transform: scale(0.98);
+}
+
+.ant-queen-click-text {
+    font-size: 36px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#ant-queen-shop-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ant-queen-shop-section {
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #654321;
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 350px;
+    max-width: 500px;
+}
+
+.ant-queen-shop-section h2 {
+    color: #ffd700;
+    margin-bottom: 15px;
+    font-size: 24px;
+    border-bottom: 2px solid #654321;
+    padding-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ant-queen-shop-item {
+    background: rgba(139, 90, 60, 0.3);
+    border: 1px solid #654321;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 8px 0;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ant-queen-shop-item:hover {
+    background: rgba(139, 90, 60, 0.5);
+    border-color: #ffd700;
+}
+
+.ant-queen-shop-item.ant-queen-affordable {
+    border-color: #90ee90;
+}
+
+.ant-queen-shop-item.ant-queen-maxed {
+    border-color: #ffd700;
+    background: rgba(255, 215, 0, 0.2);
+    cursor: default;
+}
+
+.ant-queen-shop-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.ant-queen-item-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.ant-queen-item-icon {
+    font-size: 24px;
+}
+
+.ant-queen-item-count {
+    font-size: 14px;
+    color: #90ee90;
+}
+
+.ant-queen-item-cost {
+    font-size: 14px;
+    margin: 3px 0;
+}
+
+.ant-queen-item-cost.ant-queen-affordable {
+    color: #90ee90;
+}
+
+.ant-queen-item-cost.ant-queen-unaffordable {
+    color: #ff6666;
+}
+
+.ant-queen-item-description {
+    font-size: 12px;
+    color: #ccc;
+    margin-top: 5px;
+}
+
+.ant-queen-synergy-badge {
+    background: #ffd700;
+    color: #000;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+#ant-queen-prestige-button {
+    background: rgba(255, 215, 0, 0.2);
+    border: 3px solid #888;
+    border-radius: 10px;
+    padding: 15px 30px;
+    font-size: 20px;
+    color: #888;
+    cursor: not-allowed;
+    margin-top: 20px;
+    transition: all 0.3s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#ant-queen-prestige-button.ant-queen-available {
+    border-color: #ffd700;
+    color: #ffd700;
+    cursor: pointer;
+    animation: ant-queen-pulse 2s infinite;
+}
+
+@keyframes ant-queen-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.ant-queen-popup-number {
+    position: fixed;
+    font-size: 24px;
+    font-weight: bold;
+    pointer-events: none;
+    z-index: 1000;
+    animation: ant-queen-floatUp 1s ease-out forwards;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes ant-queen-floatUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-80px);
+    }
+}
+
+.ant-queen-stats {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@media (max-width: 768px) {
+    .ant-queen-header h1 {
+        font-size: 32px;
+    }
+    .ant-queen-shop-section {
+        min-width: 100%;
+    }
+    .ant-queen-click-text {
+        font-size: 24px;
+    }
+    #ant-queen-click-area {
+        padding: 20px;
+    }
+}
