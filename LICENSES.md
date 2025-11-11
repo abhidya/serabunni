@@ -2,39 +2,39 @@
 
 This document lists all third-party assets and libraries used in the Ant Queen idle/clicker game.
 
-## Game Libraries
+## Implementation Note
 
-### Phaser 3
-- **Description**: HTML5 game framework
-- **Version**: 3.70.0
-- **License**: MIT License
-- **Source**: https://phaser.io/
-- **Documentation**: https://photonstorm.github.io/phaser3-docs/
-- **Usage**: Core game engine, animation manager, particle systems
+The game is implemented using vanilla HTML5, CSS3, and JavaScript (ES6+) without external dependencies, making it fully self-contained and suitable for static hosting. The implementation draws inspiration from the following open-source libraries and game design patterns:
 
-### EasyStar.js
-- **Description**: Asynchronous A* pathfinding library
-- **Version**: 0.4.4
-- **License**: MIT License
-- **Source**: https://github.com/prettymuchbryce/easystarjs
-- **Website**: https://easystarjs.com/
-- **Usage**: Ant pathfinding on 32px grid
+## Design References & Inspirations
 
 ### break_infinity.js
 - **Description**: Big number library for idle games
-- **Version**: 2.0.2
 - **License**: MIT License
 - **Source**: https://github.com/Patashu/break_infinity.js
-- **Usage**: Handle large currency values beyond JavaScript's Number limits
-- **Note**: successor library break_eternity.js available as future upgrade option
+- **Usage**: Inspired the BigNum class implementation for handling large currency values
+- **Note**: Custom simplified implementation; not using the actual library
+
+### Phaser 3
+- **Description**: HTML5 game framework
+- **License**: MIT License
+- **Source**: https://phaser.io/
+- **Documentation**: https://photonstorm.github.io/phaser3-docs/
+- **Usage**: Reference for game loop patterns and animation concepts
+
+### EasyStar.js
+- **Description**: Asynchronous A* pathfinding library
+- **License**: MIT License
+- **Source**: https://github.com/prettymuchbryce/easystarjs
+- **Website**: https://easystarjs.com/
+- **Usage**: Reference for pathfinding concepts (infrastructure in place for future enhancement)
 
 ### tsParticles
 - **Description**: Lightweight particle animation library
-- **Version**: 2.12.0
 - **License**: MIT License
 - **Source**: https://github.com/matteobruni/tsparticles
 - **Website**: https://particles.js.org/
-- **Usage**: Ambient particle effects for pheromones and spores
+- **Usage**: Reference for particle effect concepts (implemented with Canvas API)
 
 ## Game Assets
 

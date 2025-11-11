@@ -12,1329 +12,1043 @@
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            overflow: hidden;
+            background: linear-gradient(135deg, #8b6914 0%, #4a2c2a 100%);
+            overflow-x: hidden;
+            color: #fff;
         }
         #game-container {
             width: 100vw;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            padding: 20px;
         }
-        #loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 24px;
+        .header {
             text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 48px;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px #000;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 18px;
+            color: #ddd;
+        }
+        #currency-display {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #ffd700;
+        }
+        .currency-item {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+        .production {
+            font-size: 14px;
+            color: #90ee90;
+        }
+        #click-area {
+            background: rgba(255, 215, 0, 0.2);
+            border: 3px solid #ffd700;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 20px 0;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.1s;
+            position: relative;
+        }
+        #click-area:hover {
+            background: rgba(255, 215, 0, 0.3);
+            transform: scale(1.02);
+        }
+        #click-area:active {
+            transform: scale(0.98);
+        }
+        .click-text {
+            font-size: 36px;
+            text-align: center;
+        }
+        #shop-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+        }
+        .shop-section {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #654321;
+            border-radius: 10px;
+            padding: 15px;
+            min-width: 350px;
+            max-width: 500px;
+        }
+        .shop-section h2 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 24px;
+            border-bottom: 2px solid #654321;
+            padding-bottom: 10px;
+        }
+        .shop-item {
+            background: rgba(139, 90, 60, 0.3);
+            border: 1px solid #654321;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .shop-item:hover {
+            background: rgba(139, 90, 60, 0.5);
+            border-color: #ffd700;
+        }
+        .shop-item.affordable {
+            border-color: #90ee90;
+        }
+        .shop-item.maxed {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.2);
+            cursor: default;
+        }
+        .shop-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .item-name {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .item-icon {
+            font-size: 24px;
+        }
+        .item-count {
+            font-size: 14px;
+            color: #90ee90;
+        }
+        .item-cost {
+            font-size: 14px;
+            margin: 3px 0;
+        }
+        .item-cost.affordable {
+            color: #90ee90;
+        }
+        .item-cost.unaffordable {
+            color: #ff6666;
+        }
+        .item-description {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 5px;
+        }
+        .synergy-badge {
+            background: #ffd700;
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        #prestige-button {
+            background: rgba(255, 215, 0, 0.2);
+            border: 3px solid #888;
+            border-radius: 10px;
+            padding: 15px 30px;
+            font-size: 20px;
+            color: #888;
+            cursor: not-allowed;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        #prestige-button.available {
+            border-color: #ffd700;
+            color: #ffd700;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .popup-number {
+            position: fixed;
+            font-size: 24px;
+            font-weight: bold;
+            pointer-events: none;
             z-index: 1000;
+            animation: floatUp 1s ease-out forwards;
+        }
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-80px);
+            }
+        }
+        #ants-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        #game-container > * {
+            position: relative;
+            z-index: 2;
+        }
+        .stats {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 20px;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 32px;
+            }
+            .shop-section {
+                min-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="loading">
-        <div>🐜 Loading Ant Queen...</div>
-        <div style="font-size: 14px; margin-top: 10px;">Initializing colony...</div>
-    </div>
-    <div id="game-container"></div>
+    <canvas id="ants-canvas"></canvas>
+    <div id="game-container">
+        <div class="header">
+            <h1>🐜 ANT QUEEN 👑</h1>
+            <p>Build and grow your ant colony!</p>
+        </div>
 
-    <!-- Phaser 3 via CDN with fallback -->
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
-    
-    <!-- EasyStar.js for pathfinding - https://easystarjs.com/ -->
-    <script src="https://cdn.jsdelivr.net/npm/easystarjs@0.4.4/bin/easystar.min.js"></script>
-    
-    <!-- break_infinity.js for big numbers - https://github.com/Patashu/break_infinity.js -->
-    <script src="https://cdn.jsdelivr.net/npm/break_infinity.js@2.0.2/break_infinity.min.js"></script>
-    
-    <!-- tsParticles for ambient particles - https://particles.js.org/ -->
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+        <div id="currency-display">
+            <div class="currency-item">🌾 Food: <span id="food-amount">10</span></div>
+            <div class="currency-item">🥚 Brood: <span id="brood-amount">0</span></div>
+            <div class="currency-item">👑 Royal Jelly: <span id="jelly-amount">0</span></div>
+            <div class="production">⚡ <span id="production-rate">0.00</span>/sec</div>
+        </div>
+
+        <div id="click-area">
+            <div class="click-text">🌾 Click for Food! 🌾</div>
+        </div>
+
+        <div id="shop-container">
+            <div class="shop-section">
+                <h2>🐜 Workers</h2>
+                <div id="units-shop"></div>
+            </div>
+
+            <div class="shop-section">
+                <h2>🏠 Buildings</h2>
+                <div id="rooms-shop"></div>
+            </div>
+        </div>
+
+        <button id="prestige-button">👑 PRESTIGE (Locked)</button>
+
+        <div class="stats">
+            <div>Colony Age: <span id="colony-age">0</span>s | Total Clicks: <span id="total-clicks">0</span></div>
+            <div style="margin-top: 10px; font-size: 10px;">
+                Built with HTML5 Canvas | Save system with offline progress | Prestige for meta-progression
+            </div>
+        </div>
+    </div>
+
 
     <script>
-        // Wait for libraries to load
-        window.addEventListener('load', function() {
-            if (typeof Phaser === 'undefined') {
-                document.getElementById('loading').innerHTML = '<div style="color: #ff6b6b;">Error: Failed to load Phaser 3. Please check your internet connection.</div>';
-                return;
-            }
+        (function() {
+            'use strict';
 
-            // Hide loading screen after a short delay
-            setTimeout(() => {
-                const loadingEl = document.getElementById('loading');
-                if (loadingEl) loadingEl.style.display = 'none';
-            }, 1000);
-
-            // ===== GAME CONFIGURATION =====
-            const GAME_CONFIG = {
-                TILE_SIZE: 32,
-                GRID_WIDTH: 20,
-                GRID_HEIGHT: 15,
-                TICK_RATE: 100, // 10Hz economy tick
-                SAVE_INTERVAL: 30000, // Autosave every 30 seconds
-                MAX_OFFLINE_HOURS: 16,
-                OFFLINE_EFFICIENCY_DROPOFF: 8, // Hours before efficiency drops to 50%
-            };
-
-            // ===== NUMBER WRAPPER using break_infinity.js =====
-            // Reference: https://github.com/Patashu/break_infinity.js
-            class GameNumber {
-                constructor(value) {
-                    this.value = new Decimal(value);
-                }
-
-                add(other) {
-                    return new GameNumber(this.value.add(other.value || other));
-                }
-
-                sub(other) {
-                    return new GameNumber(this.value.sub(other.value || other));
-                }
-
-                mul(other) {
-                    return new GameNumber(this.value.mul(other.value || other));
-                }
-
-                div(other) {
-                    return new GameNumber(this.value.div(other.value || other));
-                }
-
-                pow(other) {
-                    return new GameNumber(this.value.pow(other.value || other));
-                }
-
-                gte(other) {
-                    return this.value.gte(other.value || other);
-                }
-
-                lte(other) {
-                    return this.value.lte(other.value || other);
-                }
-
-                gt(other) {
-                    return this.value.gt(other.value || other);
-                }
-
-                lt(other) {
-                    return this.value.lt(other.value || other);
-                }
-
-                floor() {
-                    return new GameNumber(this.value.floor());
-                }
-
-                toString() {
-                    return this.formatCompact();
-                }
-
-                toNumber() {
-                    return this.value.toNumber();
-                }
-
-                formatCompact() {
-                    const num = this.value;
-                    if (num.lt(1000)) {
-                        return num.toFixed(0);
+            // ===== BIG NUMBER CLASS =====
+        // Simplified version inspired by break_infinity.js concepts
+        // Reference: https://github.com/Patashu/break_infinity.js
+        class BigNum {
+            constructor(mantissa, exponent) {
+                if (typeof mantissa === 'string') {
+                    const num = parseFloat(mantissa);
+                    if (isNaN(num)) {
+                        this.mantissa = 0;
+                        this.exponent = 0;
+                    } else {
+                        this.normalize(num, 0);
                     }
-                    if (num.lt(1e6)) {
-                        return (num.toNumber() / 1000).toFixed(2) + 'K';
-                    }
-                    if (num.lt(1e9)) {
-                        return (num.toNumber() / 1e6).toFixed(2) + 'M';
-                    }
-                    if (num.lt(1e12)) {
-                        return (num.toNumber() / 1e9).toFixed(2) + 'B';
-                    }
-                    if (num.lt(1e15)) {
-                        return (num.toNumber() / 1e12).toFixed(2) + 'T';
-                    }
-                    // Scientific notation for very large numbers
-                    return num.toExponential(2);
+                } else if (typeof mantissa === 'object' && mantissa.mantissa !== undefined) {
+                    this.mantissa = mantissa.mantissa;
+                    this.exponent = mantissa.exponent;
+                } else {
+                    this.normalize(mantissa || 0, exponent || 0);
                 }
             }
 
-            // ===== GAME DATA TABLES =====
-            // Reference: Cookie Clicker tier-based progression patterns
-            const UNIT_DATA = {
-                nurses: {
-                    id: 'nurses',
-                    name: 'Nurses',
-                    baseCost: 15,
-                    growth: 1.18,
-                    baseProd: 0.02,
-                    prodType: 'brood',
-                    description: 'Care for larvae, increase hatch speed',
-                    icon: '🐜',
-                    synergies: [
-                        { at: 25, type: 'hatch_speed', value: 0.5 },
-                        { at: 50, type: 'hatch_speed', value: 0.5 },
-                        { at: 100, type: 'hatch_speed', value: 0.5 }
-                    ]
-                },
-                foragers: {
-                    id: 'foragers',
-                    name: 'Foragers',
-                    baseCost: 10,
-                    growth: 1.15,
-                    baseProd: 0.10,
-                    prodType: 'food',
-                    description: 'Gather food for the colony',
-                    icon: '🐜',
-                    synergies: [
-                        { at: 25, type: 'food_bonus', value: 0.02 },
-                        { at: 50, type: 'food_bonus', value: 0.02 },
-                        { at: 100, type: 'food_bonus', value: 0.02 }
-                    ]
-                },
-                builders: {
-                    id: 'builders',
-                    name: 'Builders',
-                    baseCost: 50,
-                    growth: 1.20,
-                    baseProd: 0.02,
-                    prodType: 'build_speed',
-                    description: 'Reduce build and upgrade times',
-                    icon: '🐜',
-                    synergies: [
-                        { at: 25, type: 'build_speed', value: 0.1 },
-                        { at: 50, type: 'build_speed', value: 0.1 },
-                        { at: 100, type: 'build_speed', value: 0.1 }
-                    ]
-                },
-                soldiers: {
-                    id: 'soldiers',
-                    name: 'Soldiers',
-                    baseCost: 100,
-                    growth: 1.22,
-                    baseProd: 0.05,
-                    prodType: 'courage',
-                    description: 'Defend colony and boost work rate',
-                    icon: '🐜',
-                    synergies: [
-                        { at: 25, type: 'work_rate', value: 0.05 },
-                        { at: 50, type: 'work_rate', value: 0.05 },
-                        { at: 100, type: 'work_rate', value: 0.05 }
-                    ]
-                },
-                explorers: {
-                    id: 'explorers',
-                    name: 'Explorers',
-                    baseCost: 250,
-                    growth: 1.22,
-                    baseProd: 0.01,
-                    prodType: 'discovery',
-                    description: 'Reveal map nodes and find rare items',
-                    icon: '🐜',
-                    synergies: [
-                        { at: 25, type: 'rare_drop', value: 0.005 },
-                        { at: 50, type: 'rare_drop', value: 0.005 },
-                        { at: 100, type: 'rare_drop', value: 0.005 }
-                    ]
-                },
-                alates: {
-                    id: 'alates',
-                    name: 'Alates (New Queens)',
-                    baseCost: 5000,
-                    growth: 1.35,
-                    baseProd: 0.02,
-                    prodType: 'subcolony',
-                    description: 'Create sub-colonies for federation bonuses',
-                    icon: '👑',
-                    synergies: [
-                        { at: 5, type: 'global_prod', value: 0.02 },
-                        { at: 10, type: 'global_prod', value: 0.02 },
-                        { at: 25, type: 'global_prod', value: 0.02 }
-                    ]
+            normalize(m, e) {
+                if (m === 0) {
+                    this.mantissa = 0;
+                    this.exponent = 0;
+                    return;
                 }
-            };
-
-            const ROOM_DATA = {
-                nursery: {
-                    id: 'nursery',
-                    name: 'Nursery',
-                    baseCost: 100,
-                    growthTier: 1.35,
-                    maxTier: 3,
-                    effects: [
-                        { tier: 1, type: 'hatch_speed', value: 0.10 },
-                        { tier: 2, type: 'hatch_speed', value: 0.10 },
-                        { tier: 3, type: 'hatch_speed', value: 0.15 }
-                    ],
-                    description: 'Increases hatching speed',
-                    icon: '🥚'
-                },
-                hatchery: {
-                    id: 'hatchery',
-                    name: 'Hatchery',
-                    baseCost: 250,
-                    growthTier: 1.35,
-                    maxTier: 3,
-                    effects: [
-                        { tier: 1, type: 'larva_capacity', value: 1 },
-                        { tier: 2, type: 'larva_capacity', value: 1 },
-                        { tier: 3, type: 'larva_capacity', value: 2 }
-                    ],
-                    description: 'Increases larva capacity',
-                    icon: '🪺'
-                },
-                granary: {
-                    id: 'granary',
-                    name: 'Granary',
-                    baseCost: 150,
-                    growthTier: 1.35,
-                    maxTier: 3,
-                    effects: [
-                        { tier: 1, type: 'food_storage', value: 0.05 },
-                        { tier: 2, type: 'food_storage', value: 0.10 },
-                        { tier: 3, type: 'food_storage', value: 0.15 }
-                    ],
-                    description: 'Increases food storage capacity',
-                    icon: '🌾'
-                },
-                fungusFarm: {
-                    id: 'fungusFarm',
-                    name: 'Fungus Farm',
-                    baseCost: 200,
-                    growthTier: 1.35,
-                    maxTier: 3,
-                    effects: [
-                        { tier: 1, type: 'food_production', value: 0.03 },
-                        { tier: 2, type: 'food_production', value: 0.05 },
-                        { tier: 3, type: 'food_production', value: 0.07 }
-                    ],
-                    description: 'Increases food production',
-                    icon: '🍄'
-                },
-                workshop: {
-                    id: 'workshop',
-                    name: 'Workshop',
-                    baseCost: 300,
-                    growthTier: 1.35,
-                    maxTier: 3,
-                    effects: [
-                        { tier: 1, type: 'builder_rate', value: 0.10 },
-                        { tier: 2, type: 'builder_rate', value: 0.10 },
-                        { tier: 3, type: 'builder_rate', value: 0.15 }
-                    ],
-                    description: 'Boosts builder effectiveness',
-                    icon: '🔨',
-                    adjacencyBonus: { type: 'builder_rate', value: 0.05 }
-                },
-                barracks: {
-                    id: 'barracks',
-                    name: 'Barracks',
-                    baseCost: 400,
-                    growthTier: 1.35,
-                    maxTier: 3,
-                    effects: [
-                        { tier: 1, type: 'soldier_buff', value: 0.10 },
-                        { tier: 2, type: 'soldier_buff', value: 0.10 },
-                        { tier: 3, type: 'soldier_buff', value: 0.15 }
-                    ],
-                    description: 'Increases soldier buff strength',
-                    icon: '⚔️'
-                },
-                mapRoom: {
-                    id: 'mapRoom',
-                    name: 'Map Room',
-                    baseCost: 350,
-                    growthTier: 1.35,
-                    maxTier: 1,
-                    effects: [
-                        { tier: 1, type: 'enable_map', value: 1 }
-                    ],
-                    description: 'Unlocks exploration and events',
-                    icon: '🗺️'
-                },
-                queensChamber: {
-                    id: 'queensChamber',
-                    name: "Queen's Chamber",
-                    baseCost: 1000,
-                    growthTier: 1.35,
-                    maxTier: 1,
-                    effects: [
-                        { tier: 1, type: 'enable_prestige', value: 1 }
-                    ],
-                    description: 'Unlocks prestige system',
-                    icon: '👑'
-                },
-                pheromoneLab: {
-                    id: 'pheromoneLab',
-                    name: 'Pheromone Lab',
-                    baseCost: 800,
-                    growthTier: 1.35,
-                    maxTier: 3,
-                    effects: [
-                        { tier: 1, type: 'global_production', value: 0.02 },
-                        { tier: 2, type: 'global_production', value: 0.02 },
-                        { tier: 3, type: 'global_production', value: 0.03 }
-                    ],
-                    description: 'Global production bonus',
-                    icon: '⚗️'
+                while (Math.abs(m) >= 10) {
+                    m /= 10;
+                    e++;
                 }
-            };
-
-            // ===== GAME STATE =====
-            class GameState {
-                constructor() {
-                    this.version = '1.0.0';
-                    this.currencies = {
-                        food: new GameNumber(10),
-                        broodPoints: new GameNumber(0),
-                        pheromones: new GameNumber(0),
-                        royalJelly: new GameNumber(0)
-                    };
-                    this.units = {};
-                    this.rooms = {};
-                    this.meta = {
-                        totalLifetimeFood: new GameNumber(0),
-                        prestigeCount: 0,
-                        metaUpgrades: {}
-                    };
-                    this.stats = {
-                        startTime: Date.now(),
-                        lastTick: Date.now(),
-                        lastSave: Date.now(),
-                        totalClicks: 0,
-                        timeToFirstAutoclick: null,
-                        timeToFirstPrestige: null
-                    };
-                    this.settings = {
-                        reducedMotion: false,
-                        compactNotation: true,
-                        particleDensity: 1.0
-                    };
-                    
-                    // Initialize units
-                    Object.keys(UNIT_DATA).forEach(key => {
-                        this.units[key] = { level: 0 };
-                    });
-                    
-                    // Initialize rooms
-                    Object.keys(ROOM_DATA).forEach(key => {
-                        this.rooms[key] = { tier: 0 };
-                    });
+                while (Math.abs(m) < 1 && m !== 0) {
+                    m *= 10;
+                    e--;
                 }
+                this.mantissa = m;
+                this.exponent = e;
+            }
 
-                calculateUnitCost(unitId) {
+            add(other) {
+                if (!(other instanceof BigNum)) other = new BigNum(other);
+                if (this.exponent === other.exponent) {
+                    return new BigNum(this.mantissa + other.mantissa, this.exponent);
+                }
+                if (this.exponent > other.exponent) {
+                    const diff = this.exponent - other.exponent;
+                    if (diff > 15) return new BigNum(this.mantissa, this.exponent);
+                    return new BigNum(this.mantissa + other.mantissa / Math.pow(10, diff), this.exponent);
+                } else {
+                    const diff = other.exponent - this.exponent;
+                    if (diff > 15) return new BigNum(other.mantissa, other.exponent);
+                    return new BigNum(this.mantissa / Math.pow(10, diff) + other.mantissa, other.exponent);
+                }
+            }
+
+            sub(other) {
+                if (!(other instanceof BigNum)) other = new BigNum(other);
+                const negOther = new BigNum(-other.mantissa, other.exponent);
+                return this.add(negOther);
+            }
+
+            mul(other) {
+                if (!(other instanceof BigNum)) other = new BigNum(other);
+                return new BigNum(this.mantissa * other.mantissa, this.exponent + other.exponent);
+            }
+
+            div(other) {
+                if (!(other instanceof BigNum)) other = new BigNum(other);
+                return new BigNum(this.mantissa / other.mantissa, this.exponent - other.exponent);
+            }
+
+            pow(exp) {
+                if (typeof exp !== 'number') exp = exp.toNumber();
+                return new BigNum(Math.pow(this.mantissa, exp), this.exponent * exp);
+            }
+
+            gte(other) {
+                if (!(other instanceof BigNum)) other = new BigNum(other);
+                if (this.exponent !== other.exponent) return this.exponent > other.exponent;
+                return this.mantissa >= other.mantissa;
+            }
+
+            gt(other) {
+                if (!(other instanceof BigNum)) other = new BigNum(other);
+                if (this.exponent !== other.exponent) return this.exponent > other.exponent;
+                return this.mantissa > other.mantissa;
+            }
+
+            toNumber() {
+                return this.mantissa * Math.pow(10, this.exponent);
+            }
+
+            toString() {
+                return this.format();
+            }
+
+            format() {
+                const num = this.toNumber();
+                if (isNaN(num) || !isFinite(num)) return '0';
+                if (num < 1000) return Math.floor(num).toString();
+                if (num < 1e6) return (num / 1000).toFixed(2) + 'K';
+                if (num < 1e9) return (num / 1e6).toFixed(2) + 'M';
+                if (num < 1e12) return (num / 1e9).toFixed(2) + 'B';
+                if (num < 1e15) return (num / 1e12).toFixed(2) + 'T';
+                return this.mantissa.toFixed(2) + 'e' + this.exponent;
+            }
+
+            toJSON() {
+                return { mantissa: this.mantissa, exponent: this.exponent };
+            }
+        }
+
+        // ===== GAME DATA =====
+        const UNIT_DATA = {
+            nurses: {
+                id: 'nurses',
+                name: 'Nurses',
+                baseCost: 15,
+                growth: 1.18,
+                baseProd: 0.02,
+                prodType: 'brood',
+                description: 'Care for larvae (+Brood)',
+                icon: '🐜',
+                synergies: [25, 50, 100]
+            },
+            foragers: {
+                id: 'foragers',
+                name: 'Foragers',
+                baseCost: 10,
+                growth: 1.15,
+                baseProd: 0.10,
+                prodType: 'food',
+                description: 'Gather food (+Food)',
+                icon: '🐜',
+                synergies: [25, 50, 100]
+            },
+            builders: {
+                id: 'builders',
+                name: 'Builders',
+                baseCost: 50,
+                growth: 1.20,
+                baseProd: 0.05,
+                prodType: 'food',
+                description: 'Build structures (+Food)',
+                icon: '🐜',
+                synergies: [25, 50, 100]
+            },
+            soldiers: {
+                id: 'soldiers',
+                name: 'Soldiers',
+                baseCost: 100,
+                growth: 1.22,
+                baseProd: 0.08,
+                prodType: 'food',
+                description: 'Defend colony (+Work rate)',
+                icon: '🐜',
+                synergies: [25, 50, 100]
+            },
+            explorers: {
+                id: 'explorers',
+                name: 'Explorers',
+                baseCost: 250,
+                growth: 1.22,
+                baseProd: 0.12,
+                prodType: 'food',
+                description: 'Find resources (+Food)',
+                icon: '🐜',
+                synergies: [25, 50, 100]
+            },
+            alates: {
+                id: 'alates',
+                name: 'Alates',
+                baseCost: 5000,
+                growth: 1.35,
+                baseProd: 0.50,
+                prodType: 'food',
+                description: 'New queens (+All production)',
+                icon: '👑',
+                synergies: [5, 10, 25]
+            }
+        };
+
+        const ROOM_DATA = {
+            nursery: {
+                id: 'nursery',
+                name: 'Nursery',
+                baseCost: 100,
+                growthTier: 1.35,
+                maxTier: 3,
+                bonusPerTier: 0.10,
+                description: '+10% hatch speed/tier',
+                icon: '🥚'
+            },
+            hatchery: {
+                id: 'hatchery',
+                name: 'Hatchery',
+                baseCost: 250,
+                growthTier: 1.35,
+                maxTier: 3,
+                bonusPerTier: 0.05,
+                description: '+5% brood production/tier',
+                icon: '🪺'
+            },
+            granary: {
+                id: 'granary',
+                name: 'Granary',
+                baseCost: 150,
+                growthTier: 1.35,
+                maxTier: 3,
+                bonusPerTier: 0.08,
+                description: '+8% food storage/tier',
+                icon: '🌾'
+            },
+            fungusFarm: {
+                id: 'fungusFarm',
+                name: 'Fungus Farm',
+                baseCost: 200,
+                growthTier: 1.35,
+                maxTier: 3,
+                bonusPerTier: 0.05,
+                description: '+5% food production/tier',
+                icon: '🍄'
+            },
+            workshop: {
+                id: 'workshop',
+                name: 'Workshop',
+                baseCost: 300,
+                growthTier: 1.35,
+                maxTier: 3,
+                bonusPerTier: 0.10,
+                description: '+10% builder rate/tier',
+                icon: '🔨'
+            },
+            barracks: {
+                id: 'barracks',
+                name: 'Barracks',
+                baseCost: 400,
+                growthTier: 1.35,
+                maxTier: 3,
+                bonusPerTier: 0.10,
+                description: '+10% soldier buff/tier',
+                icon: '⚔️'
+            },
+            mapRoom: {
+                id: 'mapRoom',
+                name: 'Map Room',
+                baseCost: 350,
+                growthTier: 1.35,
+                maxTier: 1,
+                bonusPerTier: 0.05,
+                description: 'Enables exploration',
+                icon: '🗺️'
+            },
+            queensChamber: {
+                id: 'queensChamber',
+                name: "Queen's Chamber",
+                baseCost: 1000,
+                growthTier: 1.35,
+                maxTier: 1,
+                bonusPerTier: 0,
+                description: 'Unlocks prestige',
+                icon: '👑'
+            },
+            pheromoneLab: {
+                id: 'pheromoneLab',
+                name: 'Pheromone Lab',
+                baseCost: 800,
+                growthTier: 1.35,
+                maxTier: 3,
+                bonusPerTier: 0.02,
+                description: '+2% global production/tier',
+                icon: '⚗️'
+            }
+        };
+
+        // ===== GAME STATE =====
+        class GameState {
+            constructor() {
+                this.version = '1.0.0';
+                this.currencies = {
+                    food: new BigNum(10),
+                    brood: new BigNum(0),
+                    royalJelly: new BigNum(0)
+                };
+                this.units = {};
+                this.rooms = {};
+                this.stats = {
+                    startTime: Date.now(),
+                    lastTick: Date.now(),
+                    totalClicks: 0,
+                    totalLifetimeFood: new BigNum(0),
+                    prestigeCount: 0
+                };
+
+                Object.keys(UNIT_DATA).forEach(key => {
+                    this.units[key] = { level: 0 };
+                });
+
+                Object.keys(ROOM_DATA).forEach(key => {
+                    this.rooms[key] = { tier: 0 };
+                });
+            }
+
+            calculateUnitCost(unitId) {
+                const data = UNIT_DATA[unitId];
+                const level = this.units[unitId].level;
+                return new BigNum(data.baseCost * Math.pow(data.growth, level));
+            }
+
+            calculateRoomCost(roomId) {
+                const data = ROOM_DATA[roomId];
+                const tier = this.rooms[roomId].tier;
+                return new BigNum(data.baseCost * Math.pow(data.growthTier, tier));
+            }
+
+            canAffordUnit(unitId) {
+                return this.currencies.food.gte(this.calculateUnitCost(unitId));
+            }
+
+            canAffordRoom(roomId) {
+                const data = ROOM_DATA[roomId];
+                if (this.rooms[roomId].tier >= data.maxTier) return false;
+                return this.currencies.food.gte(this.calculateRoomCost(roomId));
+            }
+
+            buyUnit(unitId) {
+                if (!this.canAffordUnit(unitId)) return false;
+                const cost = this.calculateUnitCost(unitId);
+                this.currencies.food = this.currencies.food.sub(cost);
+                this.units[unitId].level++;
+                return true;
+            }
+
+            buyRoom(roomId) {
+                if (!this.canAffordRoom(roomId)) return false;
+                const cost = this.calculateRoomCost(roomId);
+                this.currencies.food = this.currencies.food.sub(cost);
+                this.rooms[roomId].tier++;
+                return true;
+            }
+
+            calculateProduction() {
+                let foodPerSec = new BigNum(0);
+                let broodPerSec = new BigNum(0);
+                let globalMultiplier = 1.0;
+
+                // Calculate base production from units
+                Object.keys(UNIT_DATA).forEach(unitId => {
                     const data = UNIT_DATA[unitId];
                     const level = this.units[unitId].level;
-                    return new GameNumber(data.baseCost).mul(Math.pow(data.growth, level));
-                }
+                    if (level > 0) {
+                        const baseProd = new BigNum(data.baseProd * level);
+                        
+                        // Check synergies
+                        let synergyMult = 1.0;
+                        data.synergies.forEach(threshold => {
+                            if (level >= threshold) {
+                                synergyMult += 0.5; // +50% per synergy threshold
+                            }
+                        });
+                        
+                        const prod = baseProd.mul(synergyMult);
+                        
+                        if (data.prodType === 'food') {
+                            foodPerSec = foodPerSec.add(prod);
+                        } else if (data.prodType === 'brood') {
+                            broodPerSec = broodPerSec.add(prod);
+                        }
+                    }
+                });
 
-                calculateRoomCost(roomId) {
+                // Apply room bonuses
+                Object.keys(this.rooms).forEach(roomId => {
                     const data = ROOM_DATA[roomId];
                     const tier = this.rooms[roomId].tier;
-                    return new GameNumber(data.baseCost).mul(Math.pow(data.growthTier, tier));
-                }
-
-                canAffordUnit(unitId) {
-                    const cost = this.calculateUnitCost(unitId);
-                    return this.currencies.food.gte(cost);
-                }
-
-                canAffordRoom(roomId) {
-                    const cost = this.calculateRoomCost(roomId);
-                    return this.currencies.food.gte(cost);
-                }
-
-                buyUnit(unitId) {
-                    if (!this.canAffordUnit(unitId)) return false;
-                    
-                    const cost = this.calculateUnitCost(unitId);
-                    this.currencies.food = this.currencies.food.sub(cost);
-                    this.units[unitId].level++;
-                    
-                    // Track time to first autoclick
-                    if (unitId === 'foragers' && this.units[unitId].level === 1 && !this.stats.timeToFirstAutoclick) {
-                        this.stats.timeToFirstAutoclick = Date.now() - this.stats.startTime;
+                    if (tier > 0) {
+                        const bonus = data.bonusPerTier * tier;
+                        globalMultiplier += bonus;
                     }
-                    
-                    return true;
-                }
+                });
 
-                buyRoom(roomId) {
-                    const data = ROOM_DATA[roomId];
-                    if (this.rooms[roomId].tier >= data.maxTier) return false;
-                    if (!this.canAffordRoom(roomId)) return false;
-                    
-                    const cost = this.calculateRoomCost(roomId);
-                    this.currencies.food = this.currencies.food.sub(cost);
-                    this.rooms[roomId].tier++;
-                    
-                    return true;
-                }
+                // Apply Royal Jelly bonus (1% per jelly)
+                const jellyBonus = this.currencies.royalJelly.toNumber() * 0.01;
+                globalMultiplier += jellyBonus;
 
-                calculateProduction() {
-                    let foodPerTick = new GameNumber(0);
-                    let broodPerTick = new GameNumber(0);
-                    
-                    // Calculate base production from units
-                    Object.keys(UNIT_DATA).forEach(unitId => {
-                        const data = UNIT_DATA[unitId];
-                        const level = this.units[unitId].level;
-                        
-                        if (level > 0) {
-                            const baseProd = new GameNumber(data.baseProd).mul(level);
-                            
-                            if (data.prodType === 'food') {
-                                foodPerTick = foodPerTick.add(baseProd);
-                            } else if (data.prodType === 'brood') {
-                                broodPerTick = broodPerTick.add(baseProd);
-                            }
-                        }
-                    });
-                    
-                    // Apply global multipliers from rooms
-                    let globalMult = 1.0;
-                    Object.keys(this.rooms).forEach(roomId => {
-                        const data = ROOM_DATA[roomId];
-                        const tier = this.rooms[roomId].tier;
-                        
-                        if (tier > 0 && data.effects) {
-                            data.effects.forEach(effect => {
-                                if (effect.tier <= tier) {
-                                    if (effect.type === 'food_production') {
-                                        globalMult += effect.value;
-                                    } else if (effect.type === 'global_production') {
-                                        globalMult += effect.value;
-                                    }
-                                }
-                            });
-                        }
-                    });
-                    
-                    // Apply synergies
-                    Object.keys(UNIT_DATA).forEach(unitId => {
-                        const data = UNIT_DATA[unitId];
-                        const level = this.units[unitId].level;
-                        
-                        if (level > 0 && data.synergies) {
-                            data.synergies.forEach(synergy => {
-                                if (level >= synergy.at) {
-                                    if (synergy.type === 'food_bonus') {
-                                        const explorerBonus = this.units.explorers.level * synergy.value;
-                                        globalMult += explorerBonus;
-                                    } else if (synergy.type === 'global_prod') {
-                                        globalMult += synergy.value;
-                                    }
-                                }
-                            });
-                        }
-                    });
-                    
-                    foodPerTick = foodPerTick.mul(globalMult);
-                    broodPerTick = broodPerTick.mul(globalMult);
-                    
-                    return { foodPerTick, broodPerTick };
-                }
+                foodPerSec = foodPerSec.mul(globalMultiplier);
+                broodPerSec = broodPerSec.mul(globalMultiplier);
 
-                tick() {
-                    const production = this.calculateProduction();
-                    
-                    this.currencies.food = this.currencies.food.add(production.foodPerTick);
-                    this.currencies.broodPoints = this.currencies.broodPoints.add(production.broodPerTick);
-                    this.meta.totalLifetimeFood = this.meta.totalLifetimeFood.add(production.foodPerTick);
-                    
-                    this.stats.lastTick = Date.now();
-                }
-
-                clickFood() {
-                    const clickPower = new GameNumber(1);
-                    this.currencies.food = this.currencies.food.add(clickPower);
-                    this.meta.totalLifetimeFood = this.meta.totalLifetimeFood.add(clickPower);
-                    this.stats.totalClicks++;
-                }
-
-                canPrestige() {
-                    return this.rooms.queensChamber.tier >= 1 && 
-                           this.meta.totalLifetimeFood.gte(new GameNumber(1e9));
-                }
-
-                prestige() {
-                    if (!this.canPrestige()) return false;
-                    
-                    // Calculate Royal Jelly reward
-                    const lifetimeLog = Math.floor(Math.log10(this.meta.totalLifetimeFood.toNumber()));
-                    const royalJellyGain = new GameNumber(Math.max(1, lifetimeLog));
-                    
-                    // Reset currencies and units/rooms
-                    this.currencies.food = new GameNumber(10);
-                    this.currencies.broodPoints = new GameNumber(0);
-                    this.currencies.pheromones = new GameNumber(0);
-                    this.currencies.royalJelly = this.currencies.royalJelly.add(royalJellyGain);
-                    
-                    Object.keys(this.units).forEach(key => {
-                        this.units[key].level = 0;
-                    });
-                    
-                    Object.keys(this.rooms).forEach(key => {
-                        this.rooms[key].tier = 0;
-                    });
-                    
-                    this.meta.prestigeCount++;
-                    if (!this.stats.timeToFirstPrestige) {
-                        this.stats.timeToFirstPrestige = Date.now() - this.stats.startTime;
-                    }
-                    
-                    return true;
-                }
-
-                calculateOfflineProgress(timeDiff) {
-                    const hoursOffline = timeDiff / (1000 * 60 * 60);
-                    
-                    if (hoursOffline <= 0) return;
-                    
-                    // Calculate efficiency
-                    let efficiency = 1.0;
-                    if (hoursOffline > GAME_CONFIG.OFFLINE_EFFICIENCY_DROPOFF) {
-                        efficiency = 0.5;
-                    }
-                    
-                    // Cap at max offline hours
-                    const effectiveHours = Math.min(hoursOffline, GAME_CONFIG.MAX_OFFLINE_HOURS);
-                    
-                    // Calculate ticks
-                    const ticksToProcess = Math.floor(effectiveHours * 3600 * (1000 / GAME_CONFIG.TICK_RATE));
-                    
-                    // Process production
-                    const production = this.calculateProduction();
-                    const foodGain = production.foodPerTick.mul(ticksToProcess * efficiency);
-                    const broodGain = production.broodPerTick.mul(ticksToProcess * efficiency);
-                    
-                    this.currencies.food = this.currencies.food.add(foodGain);
-                    this.currencies.broodPoints = this.currencies.broodPoints.add(broodGain);
-                    this.meta.totalLifetimeFood = this.meta.totalLifetimeFood.add(foodGain);
-                    
-                    return { hoursOffline: effectiveHours, foodGain, broodGain };
-                }
-
-                save() {
-                    const saveData = {
-                        version: this.version,
-                        timestamp: Date.now(),
-                        currencies: {
-                            food: this.currencies.food.value.toString(),
-                            broodPoints: this.currencies.broodPoints.value.toString(),
-                            pheromones: this.currencies.pheromones.value.toString(),
-                            royalJelly: this.currencies.royalJelly.value.toString()
-                        },
-                        units: this.units,
-                        rooms: this.rooms,
-                        meta: {
-                            totalLifetimeFood: this.meta.totalLifetimeFood.value.toString(),
-                            prestigeCount: this.meta.prestigeCount,
-                            metaUpgrades: this.meta.metaUpgrades
-                        },
-                        stats: this.stats,
-                        settings: this.settings
-                    };
-                    
-                    return saveData;
-                }
-
-                load(saveData) {
-                    if (!saveData || saveData.version !== this.version) return false;
-                    
-                    try {
-                        this.currencies.food = new GameNumber(saveData.currencies.food);
-                        this.currencies.broodPoints = new GameNumber(saveData.currencies.broodPoints);
-                        this.currencies.pheromones = new GameNumber(saveData.currencies.pheromones);
-                        this.currencies.royalJelly = new GameNumber(saveData.currencies.royalJelly);
-                        
-                        this.units = saveData.units;
-                        this.rooms = saveData.rooms;
-                        
-                        this.meta.totalLifetimeFood = new GameNumber(saveData.meta.totalLifetimeFood);
-                        this.meta.prestigeCount = saveData.meta.prestigeCount;
-                        this.meta.metaUpgrades = saveData.meta.metaUpgrades;
-                        
-                        this.stats = saveData.stats;
-                        this.settings = saveData.settings;
-                        
-                        return true;
-                    } catch (e) {
-                        console.error('Failed to load save:', e);
-                        return false;
-                    }
-                }
+                return { foodPerSec, broodPerSec };
             }
 
-            // ===== SAVE MANAGER =====
-            class SaveManager {
-                constructor() {
-                    this.SAVE_KEY = 'antQueen_save';
-                    this.SLOT_COUNT = 3;
-                }
-
-                save(gameState, slotIndex = 0) {
-                    const saveData = gameState.save();
-                    const saves = this.getAllSaves();
-                    saves[slotIndex] = saveData;
-                    
-                    try {
-                        localStorage.setItem(this.SAVE_KEY, JSON.stringify(saves));
-                        return true;
-                    } catch (e) {
-                        console.error('Failed to save:', e);
-                        return false;
-                    }
-                }
-
-                load(slotIndex = 0) {
-                    const saves = this.getAllSaves();
-                    return saves[slotIndex] || null;
-                }
-
-                getAllSaves() {
-                    try {
-                        const data = localStorage.getItem(this.SAVE_KEY);
-                        if (!data) return Array(this.SLOT_COUNT).fill(null);
-                        const saves = JSON.parse(data);
-                        return Array.isArray(saves) ? saves : Array(this.SLOT_COUNT).fill(null);
-                    } catch (e) {
-                        return Array(this.SLOT_COUNT).fill(null);
-                    }
-                }
-
-                deleteSave(slotIndex) {
-                    const saves = this.getAllSaves();
-                    saves[slotIndex] = null;
-                    localStorage.setItem(this.SAVE_KEY, JSON.stringify(saves));
-                }
-
-                autoSave(gameState) {
-                    // Rotate through save slots for autosave
-                    const slotIndex = Math.floor(Date.now() / GAME_CONFIG.SAVE_INTERVAL) % this.SLOT_COUNT;
-                    return this.save(gameState, slotIndex);
-                }
+            tick() {
+                const production = this.calculateProduction();
+                const deltaTime = (Date.now() - this.stats.lastTick) / 1000;
+                
+                const foodGain = production.foodPerSec.mul(deltaTime);
+                const broodGain = production.broodPerSec.mul(deltaTime);
+                
+                this.currencies.food = this.currencies.food.add(foodGain);
+                this.currencies.brood = this.currencies.brood.add(broodGain);
+                this.stats.totalLifetimeFood = this.stats.totalLifetimeFood.add(foodGain);
+                
+                this.stats.lastTick = Date.now();
             }
 
-            // ===== PHASER SCENES =====
+            clickFood() {
+                const clickPower = new BigNum(1);
+                this.currencies.food = this.currencies.food.add(clickPower);
+                this.stats.totalLifetimeFood = this.stats.totalLifetimeFood.add(clickPower);
+                this.stats.totalClicks++;
+            }
 
-            // Boot Scene - Initialize game systems
-            class BootScene extends Phaser.Scene {
-                constructor() {
-                    super({ key: 'BootScene' });
+            canPrestige() {
+                return this.rooms.queensChamber.tier >= 1 && 
+                       this.stats.totalLifetimeFood.gte(new BigNum(1e9));
+            }
+
+            prestige() {
+                if (!this.canPrestige()) return false;
+
+                // Calculate Royal Jelly reward
+                const lifetimeNum = this.stats.totalLifetimeFood.toNumber();
+                const jellyGain = Math.max(1, Math.floor(Math.log10(lifetimeNum)));
+                
+                // Reset currencies and units/rooms
+                this.currencies.food = new BigNum(10);
+                this.currencies.brood = new BigNum(0);
+                this.currencies.royalJelly = this.currencies.royalJelly.add(jellyGain);
+                
+                Object.keys(this.units).forEach(key => {
+                    this.units[key].level = 0;
+                });
+                
+                Object.keys(this.rooms).forEach(key => {
+                    this.rooms[key].tier = 0;
+                });
+                
+                this.stats.prestigeCount++;
+                this.stats.totalLifetimeFood = new BigNum(0);
+                
+                return true;
+            }
+
+            calculateOfflineProgress(timeDiff) {
+                const hoursOffline = timeDiff / (1000 * 60 * 60);
+                if (hoursOffline <= 0) return null;
+
+                let efficiency = 1.0;
+                if (hoursOffline > 8) efficiency = 0.5;
+                
+                const effectiveHours = Math.min(hoursOffline, 16);
+                const secondsOffline = effectiveHours * 3600;
+                
+                const production = this.calculateProduction();
+                const foodGain = production.foodPerSec.mul(secondsOffline * efficiency);
+                const broodGain = production.broodPerSec.mul(secondsOffline * efficiency);
+                
+                this.currencies.food = this.currencies.food.add(foodGain);
+                this.currencies.brood = this.currencies.brood.add(broodGain);
+                this.stats.totalLifetimeFood = this.stats.totalLifetimeFood.add(foodGain);
+                
+                return { hoursOffline: effectiveHours, foodGain, broodGain };
+            }
+
+            save() {
+                return {
+                    version: this.version,
+                    timestamp: Date.now(),
+                    currencies: {
+                        food: this.currencies.food.toJSON(),
+                        brood: this.currencies.brood.toJSON(),
+                        royalJelly: this.currencies.royalJelly.toJSON()
+                    },
+                    units: this.units,
+                    rooms: this.rooms,
+                    stats: {
+                        startTime: this.stats.startTime,
+                        totalClicks: this.stats.totalClicks,
+                        totalLifetimeFood: this.stats.totalLifetimeFood.toJSON(),
+                        prestigeCount: this.stats.prestigeCount
+                    }
+                };
+            }
+
+            load(data) {
+                if (!data || data.version !== this.version) return false;
+                
+                try {
+                    this.currencies.food = new BigNum(data.currencies.food);
+                    this.currencies.brood = new BigNum(data.currencies.brood);
+                    this.currencies.royalJelly = new BigNum(data.currencies.royalJelly);
+                    this.units = data.units;
+                    this.rooms = data.rooms;
+                    this.stats.startTime = data.stats.startTime;
+                    this.stats.totalClicks = data.stats.totalClicks;
+                    this.stats.totalLifetimeFood = new BigNum(data.stats.totalLifetimeFood);
+                    this.stats.prestigeCount = data.stats.prestigeCount;
+                    return true;
+                } catch (e) {
+                    console.error('Failed to load save:', e);
+                    return false;
                 }
+            }
+        }
 
-                preload() {
-                    // Create simple ant sprite programmatically
-                    this.createAntSprites();
+        // ===== ANT CANVAS ANIMATION =====
+        class AntCanvas {
+            constructor(canvasId) {
+                this.canvas = document.getElementById(canvasId);
+                this.ctx = this.canvas.getContext('2d');
+                this.ants = [];
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+            }
+
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+
+            addAnt() {
+                this.ants.push({
+                    x: Math.random() * this.canvas.width,
+                    y: Math.random() * this.canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    size: 3 + Math.random() * 2,
+                    color: `rgba(139, 90, 60, ${0.3 + Math.random() * 0.3})`
+                });
+            }
+
+            update() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.ants.forEach(ant => {
+                    ant.x += ant.vx;
+                    ant.y += ant.vy;
+                    
+                    if (ant.x < 0 || ant.x > this.canvas.width) ant.vx *= -1;
+                    if (ant.y < 0 || ant.y > this.canvas.height) ant.vy *= -1;
+                    
+                    this.ctx.fillStyle = ant.color;
+                    this.ctx.beginPath();
+                    this.ctx.arc(ant.x, ant.y, ant.size, 0, Math.PI * 2);
+                    this.ctx.fill();
+                });
+                
+                requestAnimationFrame(() => this.update());
+            }
+
+            setAntCount(count) {
+                const target = Math.min(30, Math.max(5, count));
+                while (this.ants.length < target) {
+                    this.addAnt();
                 }
-
-                createAntSprites() {
-                    // Create a simple ant sprite using graphics
-                    const graphics = this.add.graphics();
-                    
-                    // Idle frame
-                    graphics.fillStyle(0x654321, 1);
-                    graphics.fillCircle(8, 8, 3); // Head
-                    graphics.fillEllipse(8, 14, 4, 6); // Body
-                    graphics.fillCircle(8, 20, 2); // Abdomen
-                    
-                    graphics.generateTexture('ant_idle', 16, 24);
-                    graphics.clear();
-                    
-                    // Walk frame 1
-                    graphics.fillStyle(0x654321, 1);
-                    graphics.fillCircle(8, 7, 3);
-                    graphics.fillEllipse(8, 13, 4, 6);
-                    graphics.fillCircle(8, 19, 2);
-                    graphics.generateTexture('ant_walk1', 16, 24);
-                    graphics.clear();
-                    
-                    // Walk frame 2
-                    graphics.fillStyle(0x654321, 1);
-                    graphics.fillCircle(8, 9, 3);
-                    graphics.fillEllipse(8, 15, 4, 6);
-                    graphics.fillCircle(8, 21, 2);
-                    graphics.generateTexture('ant_walk2', 16, 24);
-                    graphics.clear();
-                    
-                    graphics.destroy();
+                while (this.ants.length > target) {
+                    this.ants.pop();
                 }
+            }
+        }
 
-                create() {
-                    // Initialize game systems
-                    this.game.gameState = new GameState();
-                    this.game.saveManager = new SaveManager();
-                    
-                    // Try to load save
-                    const saveData = this.game.saveManager.load(0);
+        // ===== GAME CONTROLLER =====
+        class GameController {
+            constructor() {
+                this.gameState = new GameState();
+                this.antCanvas = new AntCanvas('ants-canvas');
+                this.saveKey = 'antQueen_save_v1';
+                this.lastSave = Date.now();
+                
+                this.loadGame();
+                this.setupUI();
+                this.startGameLoop();
+                this.antCanvas.update();
+            }
+
+            loadGame() {
+                try {
+                    const saveData = localStorage.getItem(this.saveKey);
                     if (saveData) {
-                        const loaded = this.game.gameState.load(saveData);
-                        if (loaded) {
-                            // Calculate offline progress
-                            const timeDiff = Date.now() - saveData.timestamp;
-                            const offlineProgress = this.game.gameState.calculateOfflineProgress(timeDiff);
-                            this.game.offlineProgress = offlineProgress;
+                        const data = JSON.parse(saveData);
+                        if (this.gameState.load(data)) {
+                            const timeDiff = Date.now() - data.timestamp;
+                            const offlineProgress = this.gameState.calculateOfflineProgress(timeDiff);
+                            if (offlineProgress && offlineProgress.hoursOffline > 0.1) {
+                                this.showOfflineProgress(offlineProgress);
+                            }
                         }
                     }
-                    
-                    // Create animations using Phaser Animation Manager
-                    // Reference: https://photonstorm.github.io/phaser3-docs/Phaser.Animations.AnimationManager.html
-                    this.anims.create({
-                        key: 'ant_idle_anim',
-                        frames: [
-                            { key: 'ant_idle' },
-                            { key: 'ant_walk1' }
-                        ],
-                        frameRate: 10,
-                        repeat: -1
-                    });
-                    
-                    this.anims.create({
-                        key: 'ant_walk_anim',
-                        frames: [
-                            { key: 'ant_walk1' },
-                            { key: 'ant_walk2' },
-                            { key: 'ant_idle' }
-                        ],
-                        frameRate: 8,
-                        repeat: -1
-                    });
-                    
-                    this.scene.start('TitleScene');
+                } catch (e) {
+                    console.error('Failed to load save:', e);
                 }
             }
 
-            // Title Scene - Main menu
-            class TitleScene extends Phaser.Scene {
-                constructor() {
-                    super({ key: 'TitleScene' });
-                }
-
-                create() {
-                    const { width, height } = this.cameras.main;
-                    
-                    // Background
-                    this.add.rectangle(width / 2, height / 2, width, height, 0x4a2c2a).setOrigin(0.5);
-                    
-                    // Title
-                    this.add.text(width / 2, height / 3, '🐜 ANT QUEEN 👑', {
-                        fontSize: '48px',
-                        fontFamily: 'Arial',
-                        color: '#ffd700',
-                        stroke: '#000000',
-                        strokeThickness: 4
-                    }).setOrigin(0.5);
-                    
-                    // Subtitle
-                    this.add.text(width / 2, height / 3 + 60, 'Idle Clicker Game', {
-                        fontSize: '24px',
-                        fontFamily: 'Arial',
-                        color: '#ffffff'
-                    }).setOrigin(0.5);
-                    
-                    // Start button
-                    const startButton = this.add.text(width / 2, height / 2 + 40, 'START GAME', {
-                        fontSize: '32px',
-                        fontFamily: 'Arial',
-                        color: '#ffffff',
-                        backgroundColor: '#654321',
-                        padding: { x: 30, y: 15 }
-                    }).setOrigin(0.5).setInteractive();
-                    
-                    startButton.on('pointerover', () => {
-                        startButton.setStyle({ backgroundColor: '#8b5a3c' });
-                    });
-                    
-                    startButton.on('pointerout', () => {
-                        startButton.setStyle({ backgroundColor: '#654321' });
-                    });
-                    
-                    startButton.on('pointerdown', () => {
-                        this.scene.start('ColonyScene');
-                    });
-                    
-                    // Show offline progress if any
-                    if (this.game.offlineProgress) {
-                        const prog = this.game.offlineProgress;
-                        const text = `Welcome back!\nYou were away for ${prog.hoursOffline.toFixed(1)} hours\nGained ${prog.foodGain.toString()} food!`;
-                        this.add.text(width / 2, height - 100, text, {
-                            fontSize: '16px',
-                            fontFamily: 'Arial',
-                            color: '#90ee90',
-                            align: 'center'
-                        }).setOrigin(0.5);
-                    }
-                    
-                    // Credits
-                    this.add.text(width / 2, height - 30, 'Assets: Kenney (CC0) | Made with Phaser 3', {
-                        fontSize: '12px',
-                        fontFamily: 'Arial',
-                        color: '#888888'
-                    }).setOrigin(0.5);
+            saveGame() {
+                try {
+                    const saveData = this.gameState.save();
+                    localStorage.setItem(this.saveKey, JSON.stringify(saveData));
+                    this.lastSave = Date.now();
+                } catch (e) {
+                    console.error('Failed to save:', e);
                 }
             }
 
-            // Colony Scene - Main gameplay
-            class ColonyScene extends Phaser.Scene {
-                constructor() {
-                    super({ key: 'ColonyScene' });
-                }
+            showOfflineProgress(progress) {
+                const msg = `Welcome back!\nYou were away for ${progress.hoursOffline.toFixed(1)} hours\nGained ${progress.foodGain.format()} food!`;
+                alert(msg);
+            }
 
-                create() {
-                    const { width, height } = this.cameras.main;
-                    
-                    // Background
-                    this.add.rectangle(width / 2, height / 2, width, height, 0x3a2a1a).setOrigin(0.5);
-                    
-                    // Initialize UI
-                    this.createUI();
-                    
-                    // Initialize pathfinding (EasyStar.js)
-                    // Reference: https://easystarjs.com/
-                    if (typeof EasyStar !== 'undefined') {
-                        this.easystar = new EasyStar.js();
-                        this.setupPathfinding();
-                    }
-                    
-                    // Create some visual ants
-                    this.ants = [];
-                    this.spawnAnts(3);
-                    
-                    // Start economy tick
-                    this.time.addEvent({
-                        delay: GAME_CONFIG.TICK_RATE,
-                        callback: this.economyTick,
-                        callbackScope: this,
-                        loop: true
-                    });
-                    
-                    // Auto-save timer
-                    this.time.addEvent({
-                        delay: GAME_CONFIG.SAVE_INTERVAL,
-                        callback: this.autoSave,
-                        callbackScope: this,
-                        loop: true
-                    });
-                    
-                    // Initialize tsParticles background
-                    // Reference: https://particles.js.org/
-                    this.initParticles();
-                }
-
-                setupPathfinding() {
-                    const grid = [];
-                    for (let y = 0; y < GAME_CONFIG.GRID_HEIGHT; y++) {
-                        const row = [];
-                        for (let x = 0; x < GAME_CONFIG.GRID_WIDTH; x++) {
-                            row.push(0); // 0 = walkable
-                        }
-                        grid.push(row);
-                    }
-                    
-                    this.easystar.setGrid(grid);
-                    this.easystar.setAcceptableTiles([0]);
-                }
-
-                spawnAnts(count) {
-                    const { width, height } = this.cameras.main;
-                    for (let i = 0; i < count; i++) {
-                        const ant = this.add.sprite(
-                            Phaser.Math.Between(100, width - 100),
-                            Phaser.Math.Between(200, height - 100),
-                            'ant_idle'
-                        );
-                        ant.play('ant_idle_anim');
-                        this.ants.push(ant);
-                        
-                        // Random movement
-                        this.time.addEvent({
-                            delay: Phaser.Math.Between(2000, 5000),
-                            callback: () => this.moveAnt(ant),
-                            callbackScope: this,
-                            loop: true
-                        });
-                    }
-                }
-
-                moveAnt(ant) {
-                    const { width, height } = this.cameras.main;
-                    const targetX = Phaser.Math.Between(100, width - 100);
-                    const targetY = Phaser.Math.Between(200, height - 100);
-                    
-                    ant.play('ant_walk_anim');
-                    
-                    this.tweens.add({
-                        targets: ant,
-                        x: targetX,
-                        y: targetY,
-                        duration: 2000,
-                        onComplete: () => {
-                            ant.play('ant_idle_anim');
-                        }
-                    });
-                }
-
-                createUI() {
-                    const { width } = this.cameras.main;
-                    const gameState = this.game.gameState;
-                    
-                    // Top bar - currencies
-                    const uiY = 20;
-                    this.foodText = this.add.text(20, uiY, `🌾 Food: ${gameState.currencies.food.toString()}`, {
-                        fontSize: '18px',
-                        fontFamily: 'Arial',
-                        color: '#ffffff',
-                        backgroundColor: '#00000088',
-                        padding: { x: 10, y: 5 }
-                    });
-                    
-                    this.broodText = this.add.text(20, uiY + 30, `🥚 Brood: ${gameState.currencies.broodPoints.toString()}`, {
-                        fontSize: '16px',
-                        fontFamily: 'Arial',
-                        color: '#ffffff',
-                        backgroundColor: '#00000088',
-                        padding: { x: 10, y: 5 }
-                    });
-                    
-                    this.royalJellyText = this.add.text(20, uiY + 55, `👑 Royal Jelly: ${gameState.currencies.royalJelly.toString()}`, {
-                        fontSize: '16px',
-                        fontFamily: 'Arial',
-                        color: '#ffd700',
-                        backgroundColor: '#00000088',
-                        padding: { x: 10, y: 5 }
-                    });
-                    
-                    // Production rate
-                    this.prodText = this.add.text(20, uiY + 80, '', {
-                        fontSize: '14px',
-                        fontFamily: 'Arial',
-                        color: '#90ee90',
-                        backgroundColor: '#00000088',
-                        padding: { x: 10, y: 5 }
-                    });
-                    
-                    // Click area for food
-                    const clickArea = this.add.rectangle(width / 2, 150, 150, 150, 0xffd700, 0.3)
-                        .setOrigin(0.5)
-                        .setInteractive()
-                        .setStrokeStyle(3, 0xffd700);
-                    
-                    this.add.text(width / 2, 150, '🌾\nCLICK FOR FOOD', {
-                        fontSize: '24px',
-                        fontFamily: 'Arial',
-                        color: '#ffffff',
-                        align: 'center'
-                    }).setOrigin(0.5);
-                    
-                    clickArea.on('pointerdown', () => {
-                        gameState.clickFood();
-                        this.showPopupNumber(width / 2, 150, '+1');
-                        this.updateUI();
-                    });
-                    
-                    // Shop panels
-                    this.createShopUI();
-                }
-
-                createShopUI() {
-                    const { width, height } = this.cameras.main;
-                    const gameState = this.game.gameState;
-                    const shopX = width - 320;
-                    const shopY = 20;
-                    
-                    // Shop background
-                    this.add.rectangle(shopX + 150, shopY + 200, 280, 380, 0x2a1a0a, 0.9)
-                        .setOrigin(0.5, 0)
-                        .setStrokeStyle(2, 0x654321);
-                    
-                    this.add.text(shopX + 150, shopY + 10, '🏪 SHOP', {
-                        fontSize: '20px',
-                        fontFamily: 'Arial',
-                        color: '#ffd700'
-                    }).setOrigin(0.5, 0);
-                    
-                    // Tabs
-                    const tabY = shopY + 40;
-                    this.shopTab = 'units';
-                    
-                    const unitsTab = this.add.text(shopX + 50, tabY, 'UNITS', {
-                        fontSize: '14px',
-                        fontFamily: 'Arial',
-                        color: '#ffffff',
-                        backgroundColor: '#654321',
-                        padding: { x: 10, y: 5 }
-                    }).setInteractive();
-                    
-                    const roomsTab = this.add.text(shopX + 130, tabY, 'ROOMS', {
-                        fontSize: '14px',
-                        fontFamily: 'Arial',
-                        color: '#888888',
-                        backgroundColor: '#3a2a1a',
-                        padding: { x: 10, y: 5 }
-                    }).setInteractive();
-                    
-                    unitsTab.on('pointerdown', () => {
-                        this.shopTab = 'units';
-                        unitsTab.setStyle({ color: '#ffffff', backgroundColor: '#654321' });
-                        roomsTab.setStyle({ color: '#888888', backgroundColor: '#3a2a1a' });
-                        this.updateShopContent();
-                    });
-                    
-                    roomsTab.on('pointerdown', () => {
-                        this.shopTab = 'rooms';
-                        roomsTab.setStyle({ color: '#ffffff', backgroundColor: '#654321' });
-                        unitsTab.setStyle({ color: '#888888', backgroundColor: '#3a2a1a' });
-                        this.updateShopContent();
-                    });
-                    
-                    // Shop content container
-                    this.shopContent = this.add.container(shopX + 20, tabY + 40);
-                    this.updateShopContent();
-                    
-                    // Prestige button
-                    const prestigeBtn = this.add.text(shopX + 150, height - 40, '👑 PRESTIGE', {
-                        fontSize: '18px',
-                        fontFamily: 'Arial',
-                        color: '#888888',
-                        backgroundColor: '#2a1a0a',
-                        padding: { x: 20, y: 10 }
-                    }).setOrigin(0.5).setInteractive();
-                    
-                    prestigeBtn.on('pointerdown', () => {
-                        if (gameState.canPrestige()) {
-                            if (confirm('Prestige will reset your colony but grant Royal Jelly for permanent bonuses. Continue?')) {
-                                gameState.prestige();
-                                this.updateUI();
-                                this.showPopupNumber(width / 2, height / 2, 'PRESTIGED!', '#ffd700');
-                            }
-                        }
-                    });
-                    
-                    this.prestigeBtn = prestigeBtn;
-                }
-
-                updateShopContent() {
-                    const gameState = this.game.gameState;
-                    this.shopContent.removeAll(true);
-                    
-                    let yOffset = 0;
-                    
-                    if (this.shopTab === 'units') {
-                        Object.keys(UNIT_DATA).forEach(unitId => {
-                            const data = UNIT_DATA[unitId];
-                            const level = gameState.units[unitId].level;
-                            const cost = gameState.calculateUnitCost(unitId);
-                            const canAfford = gameState.canAffordUnit(unitId);
-                            
-                            const itemBg = this.add.rectangle(125, yOffset + 35, 240, 60, 0x3a2a1a, 0.8)
-                                .setOrigin(0.5)
-                                .setStrokeStyle(1, canAfford ? 0x90ee90 : 0x654321);
-                            
-                            const icon = this.add.text(10, yOffset + 10, data.icon, {
-                                fontSize: '24px'
-                            });
-                            
-                            const nameText = this.add.text(40, yOffset + 10, `${data.name} (${level})`, {
-                                fontSize: '14px',
-                                fontFamily: 'Arial',
-                                color: '#ffffff'
-                            });
-                            
-                            const costText = this.add.text(40, yOffset + 30, `Cost: ${cost.toString()} 🌾`, {
-                                fontSize: '12px',
-                                fontFamily: 'Arial',
-                                color: canAfford ? '#90ee90' : '#ff6666'
-                            });
-                            
-                            const prodText = this.add.text(40, yOffset + 45, data.description, {
-                                fontSize: '10px',
-                                fontFamily: 'Arial',
-                                color: '#cccccc'
-                            });
-                            
-                            if (canAfford) {
-                                itemBg.setInteractive();
-                                itemBg.on('pointerdown', () => {
-                                    if (gameState.buyUnit(unitId)) {
-                                        this.updateUI();
-                                        this.updateShopContent();
-                                    }
-                                });
-                            }
-                            
-                            this.shopContent.add([itemBg, icon, nameText, costText, prodText]);
-                            yOffset += 70;
-                        });
-                    } else if (this.shopTab === 'rooms') {
-                        Object.keys(ROOM_DATA).forEach(roomId => {
-                            const data = ROOM_DATA[roomId];
-                            const tier = gameState.rooms[roomId].tier;
-                            const cost = gameState.calculateRoomCost(roomId);
-                            const canAfford = gameState.canAffordRoom(roomId);
-                            const maxed = tier >= data.maxTier;
-                            
-                            const itemBg = this.add.rectangle(125, yOffset + 35, 240, 60, 0x3a2a1a, 0.8)
-                                .setOrigin(0.5)
-                                .setStrokeStyle(1, maxed ? 0xffd700 : (canAfford ? 0x90ee90 : 0x654321));
-                            
-                            const icon = this.add.text(10, yOffset + 10, data.icon, {
-                                fontSize: '24px'
-                            });
-                            
-                            const nameText = this.add.text(40, yOffset + 10, `${data.name} T${tier}`, {
-                                fontSize: '14px',
-                                fontFamily: 'Arial',
-                                color: '#ffffff'
-                            });
-                            
-                            const costText = this.add.text(40, yOffset + 30, maxed ? 'MAX TIER' : `Cost: ${cost.toString()} 🌾`, {
-                                fontSize: '12px',
-                                fontFamily: 'Arial',
-                                color: maxed ? '#ffd700' : (canAfford ? '#90ee90' : '#ff6666')
-                            });
-                            
-                            const descText = this.add.text(40, yOffset + 45, data.description, {
-                                fontSize: '10px',
-                                fontFamily: 'Arial',
-                                color: '#cccccc'
-                            });
-                            
-                            if (canAfford && !maxed) {
-                                itemBg.setInteractive();
-                                itemBg.on('pointerdown', () => {
-                                    if (gameState.buyRoom(roomId)) {
-                                        this.updateUI();
-                                        this.updateShopContent();
-                                    }
-                                });
-                            }
-                            
-                            this.shopContent.add([itemBg, icon, nameText, costText, descText]);
-                            yOffset += 70;
-                        });
-                    }
-                }
-
-                updateUI() {
-                    const gameState = this.game.gameState;
-                    const production = gameState.calculateProduction();
-                    
-                    this.foodText.setText(`🌾 Food: ${gameState.currencies.food.toString()}`);
-                    this.broodText.setText(`🥚 Brood: ${gameState.currencies.broodPoints.toString()}`);
-                    this.royalJellyText.setText(`👑 Royal Jelly: ${gameState.currencies.royalJelly.toString()}`);
-                    this.prodText.setText(`⚡ ${production.foodPerTick.toString()}/tick`);
-                    
-                    // Update prestige button
-                    if (gameState.canPrestige()) {
-                        this.prestigeBtn.setStyle({ color: '#ffd700' });
-                    } else {
-                        this.prestigeBtn.setStyle({ color: '#888888' });
-                    }
-                    
-                    // Spawn more ants as colony grows
-                    const totalUnits = Object.values(gameState.units).reduce((sum, u) => sum + u.level, 0);
-                    const targetAnts = Math.min(10, 3 + Math.floor(totalUnits / 10));
-                    while (this.ants.length < targetAnts) {
-                        this.spawnAnts(1);
-                    }
-                }
-
-                showPopupNumber(x, y, text, color = '#90ee90') {
-                    const popup = this.add.text(x, y, text, {
-                        fontSize: '20px',
-                        fontFamily: 'Arial',
-                        color: color,
-                        stroke: '#000000',
-                        strokeThickness: 2
-                    }).setOrigin(0.5);
-                    
-                    this.tweens.add({
-                        targets: popup,
-                        y: y - 50,
-                        alpha: 0,
-                        duration: 1000,
-                        onComplete: () => popup.destroy()
-                    });
-                }
-
-                economyTick() {
-                    this.game.gameState.tick();
+            setupUI() {
+                // Click area
+                const clickArea = document.getElementById('click-area');
+                clickArea.addEventListener('click', (e) => {
+                    this.gameState.clickFood();
+                    this.showPopupNumber(e.clientX, e.clientY, '+1', '#90ee90');
                     this.updateUI();
-                }
+                });
 
-                autoSave() {
-                    this.game.saveManager.autoSave(this.game.gameState);
-                }
-
-                initParticles() {
-                    // Initialize tsParticles for ambient effects
-                    // Reference: https://particles.js.org/
-                    if (typeof tsParticles !== 'undefined') {
-                        tsParticles.load('game-container', {
-                            particles: {
-                                number: {
-                                    value: 30,
-                                    density: {
-                                        enable: true,
-                                        value_area: 800
-                                    }
-                                },
-                                color: {
-                                    value: '#8b5a3c'
-                                },
-                                shape: {
-                                    type: 'circle'
-                                },
-                                opacity: {
-                                    value: 0.3,
-                                    random: true
-                                },
-                                size: {
-                                    value: 2,
-                                    random: true
-                                },
-                                move: {
-                                    enable: true,
-                                    speed: 0.5,
-                                    direction: 'none',
-                                    random: true,
-                                    straight: false,
-                                    out_mode: 'out'
-                                }
-                            },
-                            interactivity: {
-                                enable: false
-                            },
-                            retina_detect: true
-                        });
+                // Prestige button
+                const prestigeBtn = document.getElementById('prestige-button');
+                prestigeBtn.addEventListener('click', () => {
+                    if (this.gameState.canPrestige()) {
+                        if (confirm('Prestige will reset your colony but grant Royal Jelly for permanent bonuses. Continue?')) {
+                            this.gameState.prestige();
+                            this.updateUI();
+                            alert('Prestiged! You gained Royal Jelly for permanent production bonuses!');
+                        }
                     }
-                }
+                });
+
+                this.updateUI();
             }
 
-            // ===== PHASER GAME INITIALIZATION =====
-            const config = {
-                type: Phaser.AUTO,
-                width: window.innerWidth,
-                height: window.innerHeight,
-                parent: 'game-container',
-                backgroundColor: '#3a2a1a',
-                scene: [BootScene, TitleScene, ColonyScene],
-                scale: {
-                    mode: Phaser.Scale.RESIZE,
-                    autoCenter: Phaser.Scale.CENTER_BOTH
-                },
-                physics: {
-                    default: 'arcade',
-                    arcade: {
-                        debug: false
-                    }
+            updateUI() {
+                // Update currency display
+                document.getElementById('food-amount').textContent = this.gameState.currencies.food.format();
+                document.getElementById('brood-amount').textContent = this.gameState.currencies.brood.format();
+                document.getElementById('jelly-amount').textContent = this.gameState.currencies.royalJelly.format();
+                
+                const production = this.gameState.calculateProduction();
+                document.getElementById('production-rate').textContent = production.foodPerSec.format();
+                
+                // Update stats
+                const colonyAge = Math.floor((Date.now() - this.gameState.stats.startTime) / 1000);
+                document.getElementById('colony-age').textContent = colonyAge;
+                document.getElementById('total-clicks').textContent = this.gameState.stats.totalClicks;
+                
+                // Update units shop
+                this.updateShop('units-shop', UNIT_DATA, 'unit');
+                
+                // Update rooms shop
+                this.updateShop('rooms-shop', ROOM_DATA, 'room');
+                
+                // Update prestige button
+                const prestigeBtn = document.getElementById('prestige-button');
+                if (this.gameState.canPrestige()) {
+                    prestigeBtn.className = 'available';
+                    const jellyGain = Math.max(1, Math.floor(Math.log10(this.gameState.stats.totalLifetimeFood.toNumber())));
+                    prestigeBtn.textContent = `👑 PRESTIGE (+${jellyGain} Royal Jelly)`;
+                } else {
+                    prestigeBtn.className = '';
+                    prestigeBtn.textContent = '👑 PRESTIGE (Locked)';
                 }
-            };
+                
+                // Update ant count based on total units
+                const totalUnits = Object.values(this.gameState.units).reduce((sum, u) => sum + u.level, 0);
+                this.antCanvas.setAntCount(5 + Math.floor(totalUnits / 5));
+            }
 
-            const game = new Phaser.Game(config);
+            updateShop(containerId, dataObj, type) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                
+                Object.keys(dataObj).forEach(itemId => {
+                    const data = dataObj[itemId];
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'shop-item';
+                    
+                    let cost, canAfford, level;
+                    
+                    if (type === 'unit') {
+                        cost = this.gameState.calculateUnitCost(itemId);
+                        canAfford = this.gameState.canAffordUnit(itemId);
+                        level = this.gameState.units[itemId].level;
+                    } else {
+                        cost = this.gameState.calculateRoomCost(itemId);
+                        canAfford = this.gameState.canAffordRoom(itemId);
+                        level = this.gameState.rooms[itemId].tier;
+                        const maxed = level >= data.maxTier;
+                        if (maxed) {
+                            itemDiv.classList.add('maxed');
+                        }
+                    }
+                    
+                    if (canAfford) {
+                        itemDiv.classList.add('affordable');
+                    }
+                    
+                    // Check for synergies
+                    let synergyBadge = '';
+                    if (type === 'unit' && data.synergies) {
+                        const nextSynergy = data.synergies.find(s => level < s);
+                        if (nextSynergy) {
+                            const remaining = nextSynergy - level;
+                            synergyBadge = `<span class="synergy-badge">⭐ ${remaining} to synergy</span>`;
+                        }
+                    }
+                    
+                    itemDiv.innerHTML = `
+                        <div class="shop-item-header">
+                            <div>
+                                <span class="item-icon">${data.icon}</span>
+                                <span class="item-name">${data.name}</span>
+                                ${synergyBadge}
+                            </div>
+                            <span class="item-count">${level}</span>
+                        </div>
+                        <div class="item-cost ${canAfford ? 'affordable' : 'unaffordable'}">
+                            ${level >= (data.maxTier || 999) ? 'MAX TIER' : `Cost: ${cost.format()} 🌾`}
+                        </div>
+                        <div class="item-description">${data.description}</div>
+                    `;
+                    
+                    if (canAfford && level < (data.maxTier || 999)) {
+                        itemDiv.style.cursor = 'pointer';
+                        itemDiv.addEventListener('click', () => {
+                            let success = false;
+                            if (type === 'unit') {
+                                success = this.gameState.buyUnit(itemId);
+                            } else {
+                                success = this.gameState.buyRoom(itemId);
+                            }
+                            if (success) {
+                                this.updateUI();
+                            }
+                        });
+                    }
+                    
+                    container.appendChild(itemDiv);
+                });
+            }
 
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                game.scale.resize(window.innerWidth, window.innerHeight);
+            showPopupNumber(x, y, text, color) {
+                const popup = document.createElement('div');
+                popup.className = 'popup-number';
+                popup.textContent = text;
+                popup.style.left = x + 'px';
+                popup.style.top = y + 'px';
+                popup.style.color = color;
+                document.body.appendChild(popup);
+                
+                setTimeout(() => popup.remove(), 1000);
+            }
+
+            startGameLoop() {
+                setInterval(() => {
+                    this.gameState.tick();
+                    this.updateUI();
+                }, 100); // 10Hz tick rate
+                
+                // Auto-save every 30 seconds
+                setInterval(() => {
+                    this.saveGame();
+                }, 30000);
+                
+                // Save on page unload
+                window.addEventListener('beforeunload', () => {
+                    this.saveGame();
+                });
+            }
+        }
+
+            // ===== START GAME =====
+            window.addEventListener('load', () => {
+                new GameController();
             });
-        });
+        })();
     </script>
 </body>
 </html>
