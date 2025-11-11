@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SeraBunni - Katarina Davis</title>
+    <meta name="robots" content="noindex,nofollow">
+    <title>SeraBunni - Digimon Arcade</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -26,6 +27,17 @@
             <button class="theme-btn" data-theme="dark" title="Dark Theme">🌙</button>
             <button class="theme-btn" data-theme="holiday" title="Holiday Theme">🎄</button>
             <button class="theme-btn" data-theme="halloween" title="Halloween Theme">🎃</button>
+            <button class="theme-btn" data-theme="digimon" title="Digimon Mode">🐉</button>
+        </div>
+        
+        <!-- Background Toggle -->
+        <div class="background-toggle">
+            <button id="bg-toggle" class="bg-toggle-btn" title="Change Background">🎨</button>
+        </div>
+        
+        <!-- Music Toggle -->
+        <div class="music-toggle">
+            <button id="music-toggle" class="music-toggle-btn" title="Toggle Music">🎵</button>
         </div>
 
         <!-- Header -->
@@ -48,10 +60,10 @@
                             <div class="pic-placeholder">🐰</div>
                         </div>
                         <div class="profile-details">
-                            <h1 class="name">Katarina Davis</h1>
-                            <p class="aka">aka SeraBunni</p>
+                            <h1 class="name" id="profile-name"></h1>
+                            <p class="aka" id="profile-aka"></p>
                             <div class="contact-info">
-                                <p>📱 <a href="tel:+16503985313">+1 (650) 398-5313</a></p>
+                                <p>📱 <a href="#" id="phone-link" class="reveal-link">Click to reveal phone</a></p>
                             </div>
                         </div>
                     </div>
@@ -122,47 +134,40 @@
                 <div class="profile-box games-box">
                     <h2 class="section-title">Play Some Games! 🎮</h2>
                     <div class="box-content">
-                        <p class="games-intro">Take a break and play some retro games! Just like the good old days.</p>
+                        <p class="games-intro">🎮 Welcome to the Digimon Arcade! Play ad-free retro games! 🎮</p>
                         
                         <!-- Game 1: Snake -->
                         <div class="game-container">
                             <h3 class="game-title">🐍 Classic Snake</h3>
-                            <iframe scrolling="no" title="Snake Game" src="https://codepen.io/ettrics/embed/WRbGRN?default-tab=result&editable=false" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+                            <iframe scrolling="no" title="Snake Game" src="games/snake.html" frameborder="no" loading="lazy" allowfullscreen="true">
                             </iframe>
                         </div>
 
                         <!-- Game 2: Breakout -->
                         <div class="game-container">
                             <h3 class="game-title">🧱 Breakout</h3>
-                            <iframe scrolling="no" title="Breakout Game" src="https://codepen.io/gdube/embed/JybxxZ?default-tab=result&editable=false" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+                            <iframe scrolling="no" title="Breakout Game" src="games/breakout.html" frameborder="no" loading="lazy" allowfullscreen="true">
                             </iframe>
                         </div>
 
                         <!-- Game 3: Tetris -->
                         <div class="game-container">
                             <h3 class="game-title">🟦 Tetris</h3>
-                            <iframe scrolling="no" title="Tetris Game" src="https://codepen.io/diondiondion/embed/KKNgjoO?default-tab=result&editable=false" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+                            <iframe scrolling="no" title="Tetris Game" src="games/tetris.html" frameborder="no" loading="lazy" allowfullscreen="true">
                             </iframe>
                         </div>
 
                         <!-- Game 4: Space Invaders -->
                         <div class="game-container">
                             <h3 class="game-title">👾 Space Invaders</h3>
-                            <iframe scrolling="no" title="Space Invaders" src="https://codepen.io/zerospree/embed/bNWbvW?default-tab=result&editable=false" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+                            <iframe scrolling="no" title="Space Invaders" src="games/space-invaders.html" frameborder="no" loading="lazy" allowfullscreen="true">
                             </iframe>
                         </div>
 
-                        <!-- Game 5: Pac-Man -->
+                        <!-- Game 5: Platform Runner -->
                         <div class="game-container">
-                            <h3 class="game-title">👻 Pac-Man</h3>
-                            <iframe scrolling="no" title="Pac-Man" src="https://codepen.io/hellokatili/embed/xwKRmo?default-tab=result&editable=false" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-                            </iframe>
-                        </div>
-
-                        <!-- Game 6: Pinball -->
-                        <div class="game-container">
-                            <h3 class="game-title">🎯 Pinball</h3>
-                            <iframe scrolling="no" title="Pinball Game" src="https://codepen.io/KilledByAPixel/embed/mdQwZZJ?default-tab=result&editable=false" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+                            <h3 class="game-title">🏃 Platform Runner</h3>
+                            <iframe scrolling="no" title="Platform Runner" src="games/platform-runner.html" frameborder="no" loading="lazy" allowfullscreen="true">
                             </iframe>
                         </div>
 
@@ -170,13 +175,6 @@
                         <div class="game-container">
                             <h3 class="game-title">🐉 Digimon Animation</h3>
                             <iframe scrolling="no" title="Sprite Animation" src="https://codepen.io/AlbinZosimusJulius/embed/abyWPvr?default-tab=result&editable=false" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-                            </iframe>
-                        </div>
-
-                        <!-- San Francisco Skyline -->
-                        <div class="game-container">
-                            <h3 class="game-title">🌉 San Francisco Vibes</h3>
-                            <iframe scrolling="no" title="SF Skyline" src="https://codepen.io/thamaragerigr/embed/yLKdJOx?default-tab=result&editable=false" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
                             </iframe>
                         </div>
                     </div>

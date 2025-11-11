@@ -1,15 +1,18 @@
-# SeraBunni - Retro MySpace Landing Page
+# SeraBunni - Digimon Arcade Landing Page
 
-A fun, retro MySpace-style landing page for Katarina Davis (SeraBunni) featuring:
+An immersive Digimon-themed retro arcade experience with privacy-safe contact handling and ad-free games, featuring:
 
 - 🔒 Password protection for personalized access
-- 🎨 Four theme options (Pink, Dark, Holiday, Halloween)
-- 📱 Contact information and social media links
-- 🎮 Eight embedded retro games and animations
-- ✨ Sparkle animations and interactive effects
+- 🎨 Five theme options (Pink, Dark, Holiday, Halloween, **Digimon Mode**)
+- 🎮 Five ad-free HTML5 games (Snake, Breakout, Tetris, Space Invaders, Platform Runner)
+- 🐉 Digimon Adventure aesthetic with digital aura and data motifs
+- 🌌 Rotating background visualizations (starfield, data grid, particles)
+- 🔐 Privacy-enhanced contact information (obfuscated in source, click-to-reveal)
+- 🎵 Background music toggle with 8-bit looped theme
+- ✨ Theme-specific visual effects and animations
 - 💕 Personalized content and milestones
 - 📱 Mobile responsive design
-- 🎁 Hidden Easter egg (try the Konami code!)
+- 🎁 Enhanced Easter eggs (try the Konami code in Digimon mode!)
 
 ## Features
 
@@ -33,31 +36,63 @@ A fun, retro MySpace-style landing page for Katarina Davis (SeraBunni) featuring
   - 📖 May I Ask for One Final Thing?
 
 ### Theme Switcher
-Choose from four unique themes:
+Choose from five unique themes:
 - 💖 **Pink Theme** (Default) - Classic MySpace pink/purple gradients
 - 🌙 **Dark Theme** - Sleek dark mode with magenta accents
 - 🎄 **Holiday Theme** - Festive red and green with snowfall animation
 - 🎃 **Halloween Theme** - Spooky orange/purple/black with floating bats and ghosts
   - Auto-enables between October 25 - November 3
+- 🐉 **Digimon Mode** - Immersive Digimon Adventure cyber-realm theme
+  - Digital grid overlay and data motifs
+  - Cyan/blue color scheme with glowing effects
+  - Click anywhere for data burst animations
+  - Enhanced Konami code "evolution sequence"
 
-### Games & Animations Section
-Enjoy classic retro games and animations embedded from CodePen:
-- 🐍 Classic Snake
-- 🧱 Breakout
-- 🟦 Tetris
-- 👾 Space Invaders
-- 👻 Pac-Man
-- 🎯 Pinball Game (Lu1ky Pinball)
-- 🐉 Digimon Sprite Animation
-- 🌉 San Francisco Skyline Animation
+### Ad-Free Games Arcade
+Enjoy classic retro games built locally with HTML5 Canvas (no external ads or trackers):
+- 🐍 **Classic Snake** - Navigate the grid and grow your snake
+- 🧱 **Breakout** - Break all the bricks with your paddle
+- 🟦 **Tetris** - Stack falling blocks and clear lines
+- 👾 **Space Invaders** - Defend Earth from alien invasion
+- 🏃 **Platform Runner** - Jump over obstacles in endless runner
+- 🐉 **Digimon Animation** - Animated Digimon sprite showcase (CodePen embed)
+
+All games are:
+- ✅ Completely ad-free
+- ✅ No external trackers
+- ✅ Lightweight and fast-loading
+- ✅ Keyboard and mouse/touch controls
+- ✅ High scores and lives system
 
 ### Interactive Elements
+- **Dynamic Background Toggle** (🎨) - Cycle through visualizations:
+  - Starfield with moving stars
+  - Data grid with flowing lines
+  - Colorful particle system
+  - Pixel city nightscape
+  - Digital ocean waves
+- **Background Music Toggle** (🎵) - 8-bit style looped theme
 - Sparkle effect animations
-- Theme-specific floating elements (emojis, snowflakes, bats, ghosts)
-- Custom animated cursor
+- Theme-specific floating elements (emojis, snowflakes, bats, ghosts, Digimon symbols)
+- Custom animated cursor with sparkle effect
 - Smooth scrolling
-- Button hover effects
-- Konami code Easter egg (↑↑↓↓←→←→BA)
+- Button hover effects with glowing shadows
+- Enhanced Konami code Easter egg (↑↑↓↓←→←→BA)
+  - Rainbow effect in standard themes
+  - Digimon "evolution sequence" with data bursts in Digimon mode
+
+### Privacy & Security Features
+- **Contact Information Obfuscation**
+  - Name and contact details assembled via JavaScript at runtime
+  - Strings split and encoded to hide from static source inspection
+  - Phone number hidden behind "Click to reveal" interaction
+  - Smooth reveal animation when clicked
+- **Search Engine Privacy**
+  - `<meta name="robots" content="noindex,nofollow">` prevents indexing
+  - Contact info not visible in page source or search results
+- **Session-based Password Protection**
+  - Password required on first visit
+  - Authentication stored in sessionStorage (cleared when browser closes)
 
 ## Usage
 
