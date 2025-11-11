@@ -12,6 +12,68 @@ body {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+    cursor: none;
+    transition: background 0.5s ease;
+}
+
+/* Dark Theme */
+body.theme-dark {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #eee;
+}
+
+body.theme-dark .profile-box {
+    background: linear-gradient(135deg, #2d2d44 0%, #1f1f3a 100%);
+    border-color: #ff1493;
+}
+
+body.theme-dark .section-title {
+    background: linear-gradient(90deg, #c71585 0%, #ff1493 100%);
+}
+
+body.theme-dark .games-box {
+    background: linear-gradient(135deg, #1a3a3a 0%, #0f2a3a 100%);
+}
+
+body.theme-dark .link-btn {
+    background: linear-gradient(90deg, #c71585 0%, #8b1a6a 100%);
+}
+
+/* Holiday Theme */
+body.theme-holiday {
+    background: linear-gradient(135deg, #1a472a 0%, #0f2818 100%);
+}
+
+body.theme-holiday .header {
+    background: linear-gradient(180deg, #c41e3a 0%, #165b33 100%);
+    border-color: #ffd700;
+}
+
+body.theme-holiday .profile-box {
+    background: linear-gradient(135deg, #fff8dc 0%, #f0e68c 100%);
+    border-color: #c41e3a;
+}
+
+body.theme-holiday .section-title {
+    background: linear-gradient(90deg, #c41e3a 0%, #165b33 100%);
+}
+
+body.theme-holiday .games-box {
+    background: linear-gradient(135deg, #fff8dc 0%, #f0e68c 100%);
+    border-color: #c41e3a;
+}
+
+body.theme-holiday .games-box .section-title {
+    background: linear-gradient(90deg, #165b33 0%, #c41e3a 100%);
+}
+
+body.theme-holiday .link-btn {
+    background: linear-gradient(90deg, #c41e3a 0%, #165b33 100%);
+}
+
+body.theme-holiday .footer {
+    background: linear-gradient(180deg, #c41e3a 0%, #165b33 100%);
+    border-color: #ffd700;
 }
 
 /* MySpace Container */
@@ -21,6 +83,45 @@ body {
     padding: 20px;
     position: relative;
     z-index: 1;
+}
+
+/* Theme Switcher */
+.theme-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 25px;
+    border: 2px solid rgba(255, 105, 180, 0.5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.theme-btn {
+    width: 45px;
+    height: 45px;
+    border: 2px solid #ff1493;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.theme-btn:hover {
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 4px 12px rgba(255, 20, 147, 0.5);
+}
+
+.theme-btn.active {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(255, 20, 147, 0.8);
+    border-width: 3px;
 }
 
 /* Header */
@@ -306,6 +407,125 @@ body {
         opacity: 0;
         transform: translateY(-100px) scale(0);
     }
+}
+
+/* Custom Cursor */
+#custom-cursor {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #ff69b4;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+    background: radial-gradient(circle, rgba(255, 105, 180, 0.3) 0%, transparent 70%);
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.6);
+}
+
+#custom-cursor::after {
+    content: '✨';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    animation: cursorSpin 3s linear infinite;
+}
+
+@keyframes cursorSpin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Floating Elements */
+#floating-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.floating-emoji {
+    position: absolute;
+    font-size: 30px;
+    opacity: 0.7;
+    animation: float 15s infinite ease-in-out;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-100px) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Holiday Snow Effect */
+.snowflake {
+    position: absolute;
+    color: #fff;
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    animation: snowfall linear infinite;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(110vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Marquee for MySpace nostalgia */
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    background: rgba(255, 105, 180, 0.2);
+    padding: 5px 0;
+    margin: 10px 0;
+    border-top: 2px solid #ff69b4;
+    border-bottom: 2px solid #ff69b4;
+}
+
+.marquee {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+    font-weight: bold;
+    color: #ff1493;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
 }
 
 /* Responsive Design */
