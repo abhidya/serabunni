@@ -38,6 +38,8 @@ function checkPassword() {
         // Remove from DOM after animation
         setTimeout(() => {
             passwordOverlay.style.display = 'none';
+            // Show speaker clearing popup after successful login
+            showSpeakerClearingPopup();
         }, 800);
     } else {
         // Shake animation on wrong password
@@ -59,6 +61,20 @@ passwordSubmit.addEventListener('click', checkPassword);
 passwordInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         checkPassword();
+    }
+});
+
+// Speaker clearing popup handlers
+document.addEventListener('DOMContentLoaded', () => {
+    const speakerYesBtn = document.getElementById('speaker-clear-yes');
+    const speakerNoBtn = document.getElementById('speaker-clear-no');
+    
+    if (speakerYesBtn) {
+        speakerYesBtn.addEventListener('click', clearSpeakerWater);
+    }
+    
+    if (speakerNoBtn) {
+        speakerNoBtn.addEventListener('click', dismissSpeakerClearingPopup);
     }
 });
 
@@ -224,39 +240,94 @@ function changeBackground() {
 let musicPlaying = false;
 let audioContext;
 let oscillator;
+let backgroundAudio;
 
 function toggleMusic() {
     const musicBtn = document.getElementById('music-toggle');
     
     if (!musicPlaying) {
-        if (!audioContext) {
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        // Create audio element for MP3 playback if it doesn't exist
+        if (!backgroundAudio) {
+            backgroundAudio = new Audio("ophelia-slowed-faded-lumineers.mp3");
+            backgroundAudio.loop = true;
+            backgroundAudio.volume = 0.5;
         }
         
-        // Simple 8-bit style music using oscillators
-        oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
+        // Play the MP3 file
+        backgroundAudio.play().catch(err => {
+            console.error('Failed to play audio:', err);
+        });
         
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        oscillator.frequency.value = 440;
-        oscillator.type = 'square';
-        gainNode.gain.value = 0.1;
-        
-        oscillator.start();
         musicPlaying = true;
         musicBtn.classList.add('playing');
         musicBtn.textContent = '🔊';
     } else {
-        if (oscillator) {
-            oscillator.stop();
-            oscillator = null;
+        // Pause the music
+        if (backgroundAudio) {
+            backgroundAudio.pause();
         }
         musicPlaying = false;
         musicBtn.classList.remove('playing');
         musicBtn.textContent = '🎵';
     }
+}
+
+// Speaker Water Clearing Popup
+function showSpeakerClearingPopup() {
+    // Check if popup has been shown in this session
+    if (sessionStorage.getItem('speaker-clearing-shown') === 'true') {
+        return;
+    }
+    
+    const speakerOverlay = document.getElementById('speaker-clearing-overlay');
+    if (speakerOverlay) {
+        speakerOverlay.style.display = 'flex';
+        sessionStorage.setItem('speaker-clearing-shown', 'true');
+    }
+}
+
+function clearSpeakerWater() {
+    const speakerOverlay = document.getElementById('speaker-clearing-overlay');
+    
+    // Hide the popup
+    speakerOverlay.classList.add('hidden');
+    setTimeout(() => {
+        speakerOverlay.style.display = 'none';
+    }, 800);
+    
+    // Play the water clearing tone
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    
+    // Create oscillator for water clearing tone
+    oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.value = 165;
+    oscillator.type = 'sine';
+    gainNode.gain.value = 0.5;
+    
+    oscillator.start();
+    
+    // Stop after 10 seconds
+    setTimeout(() => {
+        if (oscillator) {
+            oscillator.stop();
+            oscillator = null;
+        }
+    }, 10000);
+}
+
+function dismissSpeakerClearingPopup() {
+    const speakerOverlay = document.getElementById('speaker-clearing-overlay');
+    speakerOverlay.classList.add('hidden');
+    setTimeout(() => {
+        speakerOverlay.style.display = 'none';
+    }, 800);
 }
 
 // Theme Management
