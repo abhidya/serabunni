@@ -105,7 +105,11 @@
         format() {
             const num = this.toNumber();
             if (isNaN(num) || !isFinite(num)) return '0';
-            if (num < 1000) return Math.floor(num).toString();
+            if (num < 1000) {
+                // Show decimals for numbers less than 10, otherwise floor
+                if (num < 10) return num.toFixed(2);
+                return Math.floor(num).toString();
+            }
             if (num < 1e6) return (num / 1000).toFixed(2) + 'K';
             if (num < 1e9) return (num / 1e6).toFixed(2) + 'M';
             if (num < 1e12) return (num / 1e9).toFixed(2) + 'B';
