@@ -1,0 +1,350 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* MySpace Container */
+.myspace-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(180deg, #ff6b9d 0%, #c06c84 100%);
+    border: 3px solid #ff1493;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+    to {
+        box-shadow: 0 8px 16px rgba(255, 20, 147, 0.5);
+    }
+}
+
+.logo {
+    font-size: 48px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    letter-spacing: 2px;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.tagline {
+    font-size: 18px;
+    color: #fff;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* Main Content Layout */
+.main-content {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Profile Box Styling */
+.profile-box {
+    background: linear-gradient(135deg, #ffeef8 0%, #e0c3fc 100%);
+    border: 3px solid #ff69b4;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.section-title {
+    background: linear-gradient(90deg, #ff1493 0%, #ff69b4 100%);
+    color: #fff;
+    padding: 10px;
+    margin: -15px -15px 15px -15px;
+    border-radius: 7px 7px 0 0;
+    font-size: 20px;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid #c71585;
+}
+
+.box-content {
+    line-height: 1.6;
+}
+
+/* Profile Info */
+.profile-info {
+    text-align: center;
+}
+
+.profile-pic {
+    margin: 10px auto;
+}
+
+.pic-placeholder {
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, #ffd1dc 0%, #ffb6c1 100%);
+    border: 4px solid #ff69b4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-details {
+    margin-top: 15px;
+}
+
+.name {
+    font-size: 28px;
+    color: #c71585;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.aka {
+    font-size: 18px;
+    color: #ff1493;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.contact-info {
+    margin-top: 10px;
+}
+
+.contact-info p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.contact-info a {
+    color: #ff1493;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+/* About Me */
+.about-me .box-content p {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+/* Social Links */
+.link-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.link-btn {
+    display: block;
+    background: linear-gradient(90deg, #ff6b9d 0%, #c06c84 100%);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    text-align: center;
+    font-weight: bold;
+    border: 2px solid #ff1493;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.link-btn:hover {
+    background: linear-gradient(90deg, #c06c84 0%, #ff6b9d 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Interests */
+.interest-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background: #ff69b4;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 14px;
+    border: 2px solid #ff1493;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Games Section */
+.games-section {
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
+.games-box {
+    background: linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 100%);
+    border-color: #00bcd4;
+}
+
+.games-box .section-title {
+    background: linear-gradient(90deg, #00bcd4 0%, #0097a7 100%);
+    border-bottom: 2px solid #00838f;
+}
+
+.games-intro {
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    color: #00838f;
+}
+
+.game-container {
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #00bcd4;
+}
+
+.game-title {
+    color: #00838f;
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.game-container iframe {
+    width: 100%;
+    height: 400px;
+    border: 3px solid #00bcd4;
+    border-radius: 5px;
+    background: #fff;
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(180deg, #ff6b9d 0%, #c06c84 100%);
+    border: 3px solid #ff1493;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer p {
+    margin: 5px 0;
+}
+
+.old-school {
+    font-size: 12px;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Sparkle Effect */
+#sparkles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.sparkle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, #fff 0%, transparent 70%);
+    border-radius: 50%;
+    animation: sparkleAnim 3s linear infinite;
+    opacity: 0;
+}
+
+@keyframes sparkleAnim {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-50px) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .logo {
+        font-size: 36px;
+    }
+
+    .tagline {
+        font-size: 16px;
+    }
+
+    .game-container iframe {
+        height: 300px;
+    }
+
+    .games-section {
+        max-height: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .myspace-container {
+        padding: 10px;
+    }
+
+    .logo {
+        font-size: 28px;
+    }
+
+    .name {
+        font-size: 24px;
+    }
+
+    .game-container iframe {
+        height: 250px;
+    }
+}
